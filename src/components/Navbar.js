@@ -9,11 +9,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  navlink: {
-    padding: "6px 20px",
-    fontWeight: "600",
-    color: "#fff",
-  },
   title: {
     flexGrow: 1,
     fontFamily: "Pacifico",
@@ -22,18 +17,23 @@ const useStyles = makeStyles((theme) => ({
   Nav: {
     position: "absolute",
     color: "#fff",
+    "& .MuiButton-label": {
+      color: "#fff",
+      padding: "6px 20px 6px 0px",
+      fontWeight: "600",
+    },
   },
 }));
 
-const Navbar = () => {
+const Navbar = (props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar
         position="sticky"
-        color="transparent"
-        className={classes.Nav}
+        color={props.color}
+        className={props.className}
       >
         <Toolbar>
           <Typography
@@ -42,32 +42,16 @@ const Navbar = () => {
           >
             PicHub
           </Typography>
-          <Button
-            component={Link}
-            to="/"
-            className={classes.navlink}
-          >
+          <Button component={Link} to="/">
             Home
           </Button>
-          <Button
-            component={Link}
-            to="/signin"
-            className={classes.navlink}
-          >
+          <Button component={Link} to="/signin">
             Login
           </Button>
-          <Button
-            component={Link}
-            to="/signup"
-            className={classes.navlink}
-          >
+          <Button component={Link} to="/signup">
             SignUp
           </Button>
-          <Button
-            component={Link}
-            to="/about"
-            className={classes.navlink}
-          >
+          <Button component={Link} to="/about">
             About
           </Button>
         </Toolbar>
