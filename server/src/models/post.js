@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
-import validator from 'validator';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+// import validator from 'validator';
 
 const postSchema = new mongoose.Schema({
     image: {
         public_id: {
             type: String
         },
-        imageUrl:{
+        imageUrl: {
             type: String
         }
     },

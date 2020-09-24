@@ -1,20 +1,19 @@
 import express from 'express';
 import upload from '../config/multer';
-
-// import { signUpValidate, logInValidate } from '../middlewares/validate'
 import auth from '../middlewares/auth';
 import UserAuthControl from '../controllers/auth';
 import AvatarControl from '../controllers/avatar';         
 import UserControl from '../controllers/user';
+
+const { signup, login, logout, logoutAll } = UserAuthControl;
+const { checkForUsername, userProfile, updateUserProfile, deleteUserProfile } = UserControl
+const { getAvatar, deleteAvatar, multerErrHandler, uploadAvatar } = AvatarControl
 
 const router = express.Router();
 
 /* 
 LOGIN AND SIGNUP ARE PUBLIC ROUTES
 */
-const { signup, login, logout, logoutAll } = UserAuthControl;
-const { checkForUsername, userProfile, updateUserProfile, deleteUserProfile } = UserControl
-const { getAvatar, deleteAvatar, multerErrHandler, uploadAvatar } = AvatarControl
 
 // Sign Up  
 router.post('/users', signup);
@@ -48,8 +47,6 @@ router.patch('/users/me', auth, updateUserProfile);
 
 // Delete user profile    
 router.delete('/users/me', auth, deleteUserProfile);
-
-
 
 
 export default router;
