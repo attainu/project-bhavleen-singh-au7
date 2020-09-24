@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
+  Grid,
   makeStyles,
   Paper,
 } from "@material-ui/core";
@@ -11,6 +12,7 @@ import { Link, Redirect } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Axios from "axios";
 import { isAuth } from "../utils/helper";
+import SignupImage from "../images/signup.png";
 
 const useStyles = makeStyles((theme) => ({
   Nav: {
@@ -21,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   form: {
-    width: "30%",
+    width: "50%",
     margin: "5% auto 0px auto",
     padding: "20px",
     textAlign: "center",
   },
   formBottom: {
-    width: "30%",
+    width: "50%",
     margin: "10px auto",
     padding: "20px",
     textAlign: "center",
@@ -164,13 +166,32 @@ const Signup = () => {
       <Navbar color="primary" className={classes.Nav} />
       <ToastContainer />
       {isAuth() ? <Redirect to="/dashboard" /> : null}
-      {signupForm()}
-      <Paper
-        className={classes.formBottom}
-        variant="outlined"
+      <Grid
+        container
+        spacing={0}
+        alignItems="center"
+        justify="center"
+        style={{
+          minHeight: "90vh",
+        }}
       >
-        Have an account <Link to="/signin">Log In</Link>
-      </Paper>
+        <Grid item xs={12} md={6}>
+          <img
+            src={SignupImage}
+            alt="signupsvg"
+            className="thumbImage"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          {signupForm()}
+          <Paper
+            className={classes.formBottom}
+            variant="outlined"
+          >
+            Have an account <Link to="/signin">Log In</Link>
+          </Paper>
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };

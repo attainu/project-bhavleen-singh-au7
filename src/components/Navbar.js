@@ -40,7 +40,9 @@ const Navbar = (props) => {
             variant="h4"
             className={classes.title}
           >
-            PicHub
+            <Link className="fff" to="/">
+              PicHub
+            </Link>
           </Typography>
           <Button component={Link} to="/">
             Home

@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   center: {
@@ -36,7 +37,9 @@ const AccountActivation = () => {
     <Fragment>
       <AppBar className={classes.center}>
         <Typography variant="h4" className={classes.title}>
-          PicHub
+          <Link className="fff" to="/">
+            PicHub
+          </Link>
         </Typography>
       </AppBar>
 
