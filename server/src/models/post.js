@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema({
     image: {
-        public_id: {
+        publicId: {
             type: String
         },
         imageUrl: {
@@ -16,9 +16,13 @@ const postSchema = new mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
+            required: true,
         ref: 'User'
     }
 
+},{
+    timestamps: true
 })
+
+const Post = mongoose.model('Post', postSchema);
+export default Post;

@@ -1,7 +1,6 @@
 import sharp from 'sharp';
 import User from '../models/user';
-import { dataUri } from '../config/multer';
-import cloudinary from '../config/cloudinary';
+import uploadFileToCloudinary from '../utils/cloudinaryUpload';
 
 class AvatarControl {
 
@@ -12,8 +11,7 @@ class AvatarControl {
                     .resize({ width: 250, height: 250 })
                     .png().toBuffer();
 
-                const file = dataUri(req).content;
-                const { url, public_id } = await cloudinary.v2.uploader.upload(file)
+                const { url, public_id } = await uploadFileToCloudinary(req)
                 req.user.avatar.public_id = public_id
                 req.user.avatar.imageUrl = url
                 req.user.save()

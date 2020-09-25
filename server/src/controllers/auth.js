@@ -27,7 +27,7 @@ class UserAuthControl {
         } catch (e) {
             res.status(400).json({
                 statusCode: 400,
-                error: 'Bad request',
+                error: e.message,
                 message: ''
             });
         }
