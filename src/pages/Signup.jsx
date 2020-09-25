@@ -59,7 +59,10 @@ const Signup = ({ history }) => {
     password2: "",
     buttonText: "Sign Up",
     showPassword: false,
+    validateOnchange: false,
   });
+
+  const [errors, setErrors] = useState({});
 
   const {
     username,
@@ -72,6 +75,10 @@ const Signup = ({ history }) => {
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
+
+    validate({ [name]: event.target.value });
+    console.log(password);
+    console.log(password2);
   };
 
   // Show Password Text
@@ -84,6 +91,39 @@ const Signup = ({ history }) => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  // Validations
+  const validate = (values) => {
+    let temp = { ...errors };
+
+    if ("username" in values)
+      temp.username =
+        username.length >= 2
+          ? ""
+          : "Minimum characters length should be 3.";
+
+    if ("email" in values)
+      temp.email = /[\D\d]{4}@[\D]{4}.[\D]{3}/.test(email)
+        ? ""
+        : "Email Address is not Valid.";
+
+    if ("password" in values)
+      temp.password =
+        password.length > 5
+          ? ""
+          : "Minimum 6 characters are required.";
+
+    if ("password2" in values)
+      temp.password2 =
+        password === password2
+          ? ""
+          : "Passwords do not match.";
+
+    setErrors({ ...temp });
+
+    if (values)
+      return Object.values(temp).every((x) => x === "");
   };
 
   // Button Submit Event
@@ -127,7 +167,7 @@ const Signup = ({ history }) => {
           className={classes.mb}
           value={username}
           onChange={handleChange("username")}
-          // error={}
+          error={errors.username}
         />
         <MuiInput
           label="Email Address"
@@ -136,25 +176,22 @@ const Signup = ({ history }) => {
           className={classes.mb}
           value={email}
           onChange={handleChange("email")}
-          // error={}
+          error={errors.email}
         />
-        <FormControl
-          variant="outlined"
-          fullWidth
+        <MuiInput
+          label="Password"
+          name="password"
+          type={showPassword ? "text" : "password"}
           className={classes.mb}
-          size="small"
-        >
-          <InputLabel>Password</InputLabel>
-          <OutlinedInput
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={handleChange("password")}
-            endAdornment={
-              <InputAdornment position="end">
+          value={password}
+          onChange={handleChange("password")}
+          error={errors.password}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  edge="end"
                 >
                   {values.showPassword ? (
                     <Visibility />
@@ -163,28 +200,23 @@ const Signup = ({ history }) => {
                   )}
                 </IconButton>
               </InputAdornment>
-            }
-            labelWidth={70}
-          />
-        </FormControl>
-
-        <FormControl
-          variant="outlined"
-          fullWidth
+            ),
+          }}
+        />
+        <MuiInput
+          label="Confirm Password"
+          name="password2"
+          type={showPassword ? "text" : "password"}
           className={classes.mb}
-          size="small"
-        >
-          <InputLabel>Confirm Password</InputLabel>
-          <OutlinedInput
-            type={showPassword ? "text" : "password"}
-            value={password2}
-            onChange={handleChange("password2")}
-            endAdornment={
-              <InputAdornment position="end">
+          value={password2}
+          onChange={handleChange("password2")}
+          error={errors.password2}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  edge="end"
                 >
                   {values.showPassword ? (
                     <Visibility />
@@ -193,11 +225,9 @@ const Signup = ({ history }) => {
                   )}
                 </IconButton>
               </InputAdornment>
-            }
-            labelWidth={135}
-          />
-        </FormControl>
-
+            ),
+          }}
+        />
         <Button
           variant="contained"
           color="primary"
