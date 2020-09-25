@@ -7,6 +7,8 @@ import About from "./pages/About";
 import AccountActivation from "./pages/AccountActivation";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 const Routes = () => {
   return (
@@ -18,8 +20,8 @@ const Routes = () => {
         <Route exact path="/about" component={About} />
         <Route
           exact
-          // path="/auth/activate/:token"
-          path="/auth/activate"
+          path="/auth/activate/:token"
+          // path="/auth/activate"
           component={AccountActivation}
         />
         {/* Route when user click on forget password */}
@@ -30,9 +32,14 @@ const Routes = () => {
         />
         <Route
           exact
-          // path="/auth/password/reset/:token"
-          path="/auth/password/reset"
+          path="/auth/password/reset/:token"
+          // path="/auth/password/reset"
           component={ResetPassword}
+        />
+        <PrivateRoute
+          exact
+          path="/dashboard"
+          component={Dashboard}
         />
       </Switch>
     </Fragment>

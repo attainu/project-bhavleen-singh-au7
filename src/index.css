@@ -1,3 +1,7 @@
+body {
+  background-image: url(./images/try_bg.jpg);
+}
+
 .hundred {
   height: 100vh;
   opacity: 0.6;
@@ -22,7 +26,8 @@
 }
 
 .thumbImage {
-  margin-left: 20px;
+  display: flex;
+  margin: auto;
   filter: drop-shadow(1rem 1rem 1rem grey);
   animation: up-down 4s ease-in-out infinite
     alternate-reverse both;

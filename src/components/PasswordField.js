@@ -16,9 +16,9 @@ const PasswordField = (props) => {
     <Fragment>
       <FormControl
         fullWidth
-        variant="outlined"
         className={props.className}
         size="small"
+        variant="outlined"
       >
         <InputLabel>{props.label}</InputLabel>
         <OutlinedInput

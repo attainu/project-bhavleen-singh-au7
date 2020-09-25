@@ -1,18 +1,28 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
+  FormControl,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
   makeStyles,
+  OutlinedInput,
   Paper,
 } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import MuiInput from "../components/MuiInput";
-import PasswordField from "../components/PasswordField";
+// import PasswordField from "../components/PasswordField";
 import { Link, Redirect } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
 import Axios from "axios";
 import { isAuth } from "../utils/helper";
 import SignupImage from "../images/signup.png";
+import {
+  Visibility,
+  VisibilityOff,
+} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   Nav: {
@@ -25,21 +35,21 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "50%",
     margin: "5% auto 0px auto",
-    padding: "20px",
+    padding: theme.spacing(4),
     textAlign: "center",
   },
   formBottom: {
     width: "50%",
     margin: "10px auto",
-    padding: "20px",
+    padding: theme.spacing(4),
     textAlign: "center",
   },
   mb: {
-    marginBottom: "20px",
+    marginBottom: theme.spacing(4),
   },
 }));
 
-const Signup = () => {
+const Signup = ({ history }) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -77,9 +87,9 @@ const Signup = () => {
   };
 
   // Button Submit Event
-  const handleSubmit = (history) => (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, buttonText: "Signning Up" });
+    setValues({ ...values, buttonText: "Signing Up" });
 
     Axios({
       method: "POST",
@@ -92,12 +102,12 @@ const Signup = () => {
           username: "",
           email: "",
           password: "",
+          password2: "",
           buttonText: "Submitted",
         });
-        toast.success(response.data.message);
 
         setTimeout(() => {
-          history.push("/login");
+          history.push("/signin");
         }, 3000);
       })
       .catch((error) => {
@@ -128,26 +138,65 @@ const Signup = () => {
           onChange={handleChange("email")}
           // error={}
         />
-        <PasswordField
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={handleChange("password")}
+        <FormControl
+          variant="outlined"
+          fullWidth
           className={classes.mb}
-          labelWidth={70}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-        />
-        <PasswordField
-          label="Confirm Password"
-          type={showPassword ? "text" : "password"}
-          value={password2}
-          onChange={handleChange("password2")}
+          size="small"
+        >
+          <InputLabel>Password</InputLabel>
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={handleChange("password")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={70}
+          />
+        </FormControl>
+
+        <FormControl
+          variant="outlined"
+          fullWidth
           className={classes.mb}
-          labelWidth={135}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-        />
+          size="small"
+        >
+          <InputLabel>Confirm Password</InputLabel>
+          <OutlinedInput
+            type={showPassword ? "text" : "password"}
+            value={password2}
+            onChange={handleChange("password2")}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={135}
+          />
+        </FormControl>
 
         <Button
           variant="contained"
