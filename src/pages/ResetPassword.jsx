@@ -7,17 +7,23 @@ import {
   AppBar,
   Button,
   Grid,
+  IconButton,
+  InputAdornment,
   makeStyles,
   Paper,
   Typography,
 } from "@material-ui/core";
-import PasswordField from "../components/PasswordField";
 import SecureImage from "../images/secure.png";
 import { Link } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import MuiInput from "../components/MuiInput";
+import {
+  Visibility,
+  VisibilityOff,
+} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   center: {
@@ -47,7 +53,7 @@ const ResetPassword = ({ match }) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    email: "",
+    name: "",
     token: "",
     newPassword: "",
     buttonText: "Reset Password",
@@ -62,6 +68,8 @@ const ResetPassword = ({ match }) => {
     }
   }, []);
 
+  const [errors, setErrors] = useState({});
+
   const {
     name,
     token,
@@ -70,11 +78,10 @@ const ResetPassword = ({ match }) => {
     buttonText,
   } = values;
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      newPassword: event.target.value,
-    });
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
+
+    validate({ [name]: event.target.value });
   };
 
   // Show Password Text
@@ -85,8 +92,20 @@ const ResetPassword = ({ match }) => {
     });
   };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  // Validations
+  const validate = (values) => {
+    let temp = { ...errors };
+
+    if ("newPassword" in values)
+      temp.newPassword =
+        newPassword.length > 5
+          ? ""
+          : "Minimum 6 characters are required.";
+
+    setErrors({ ...temp });
+
+    if (values)
+      return Object.values(temp).every((x) => x === "");
   };
 
   const handleSubmit = (event) => {
@@ -124,6 +143,7 @@ const ResetPassword = ({ match }) => {
 
   const resetPasswordForm = () => (
     <Paper elevation={4} className={classes.paperStyle}>
+      <h1 className="logo">PicHub</h1>
       <Typography
         variant="subtitle1"
         className={classes.mb}
@@ -131,15 +151,29 @@ const ResetPassword = ({ match }) => {
         Enter your New Secure Password.
       </Typography>
       <form autoComplete="off">
-        <PasswordField
+        <MuiInput
           label="New Password"
+          name="newPassword"
           type={showPassword ? "text" : "password"}
-          value={newPassword}
-          onChange={handleChange}
           className={classes.mb}
-          labelWidth={105}
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
+          value={newPassword}
+          onChange={handleChange("newPassword")}
+          error={errors.newPassword}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <IconButton
+                  onClick={handleClickShowPassword}
+                >
+                  {values.showPassword ? (
+                    <Visibility />
+                  ) : (
+                    <VisibilityOff />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <Button
           variant="contained"

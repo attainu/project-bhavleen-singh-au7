@@ -1,18 +1,14 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
-  FormControl,
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   makeStyles,
-  OutlinedInput,
   Paper,
 } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import MuiInput from "../components/MuiInput";
-// import PasswordField from "../components/PasswordField";
 import { Link, Redirect } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
@@ -59,7 +55,6 @@ const Signup = ({ history }) => {
     password2: "",
     buttonText: "Sign Up",
     showPassword: false,
-    validateOnchange: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -87,10 +82,6 @@ const Signup = ({ history }) => {
       ...values,
       showPassword: !values.showPassword,
     });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
 
   // Validations
@@ -191,7 +182,6 @@ const Signup = ({ history }) => {
               <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                 >
                   {values.showPassword ? (
                     <Visibility />
@@ -216,7 +206,6 @@ const Signup = ({ history }) => {
               <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                 >
                   {values.showPassword ? (
                     <Visibility />
