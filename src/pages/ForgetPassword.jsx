@@ -6,21 +6,12 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import Navbar from "../components/Navbar";
 import MuiInput from "../components/MuiInput";
 import ForgetImage from "../images/forgot_password.png";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
-  Nav: {
-    "& .MuiButton-label": {
-      color: "#fff",
-      padding: "6px 10px",
-      fontWeight: "600",
-    },
-  },
   form: {
     width: "50%",
     margin: "5% auto 0px auto",
@@ -28,12 +19,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   mb: {
-    marginBottom: "30px",
+    marginBottom: theme.spacing(5),
   },
 }));
 
 const ForgetPassword = () => {
   const classes = useStyles();
+
+  const [errors, setErrors] = useState({});
 
   const [values, setValues] = useState({
     email: "",
@@ -42,8 +35,25 @@ const ForgetPassword = () => {
 
   const { email, buttonText } = values;
 
+  // Validations
+  const validate = (values) => {
+    let temp = { ...errors };
+
+    if ("email" in values)
+      temp.email = /[\D\d]{4}@[\D]{4}.[\D]{3}/.test(email)
+        ? ""
+        : "Email Address is not Valid.";
+
+    setErrors({ ...temp });
+
+    if (values)
+      return Object.values(temp).every((x) => x === "");
+  };
+
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
+
+    validate({ [name]: event.target.value });
   };
 
   const handleSubmit = (event) => {
@@ -56,15 +66,10 @@ const ForgetPassword = () => {
       data: { email },
     })
       .then((response) => {
-        // console.log("FORGOT PASSWORD SUCCESS", response);
         toast.success(response.data.message);
         setValues({ ...values, buttonText: "Requested" });
       })
       .catch((error) => {
-        // console.log(
-        //   "FORGOT PASSWORD ERROR",
-        //   error.response.data
-        // );
         toast.error(error.response.data.error);
         setValues({
           ...values,
@@ -88,7 +93,7 @@ const ForgetPassword = () => {
           className={classes.mb}
           value={email}
           onChange={handleChange("email")}
-          // error={}
+          error={errors.email}
         />
         <Button
           variant="contained"
@@ -104,8 +109,6 @@ const ForgetPassword = () => {
 
   return (
     <Fragment>
-      <Navbar color="primary" className={classes.Nav} />
-      <ToastContainer />
       <Grid
         container
         spacing={0}

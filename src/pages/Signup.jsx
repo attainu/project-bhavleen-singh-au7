@@ -7,11 +7,9 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
-import Navbar from "../components/Navbar";
 import MuiInput from "../components/MuiInput";
 import { Link, Redirect } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 import Axios from "axios";
 import { isAuth } from "../utils/helper";
 import SignupImage from "../images/signup.png";
@@ -21,13 +19,6 @@ import {
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  Nav: {
-    "& .MuiButton-label": {
-      color: "#fff",
-      padding: "6px 10px",
-      fontWeight: "600",
-    },
-  },
   form: {
     width: "50%",
     margin: "5% auto 0px auto",
@@ -231,8 +222,6 @@ const Signup = ({ history }) => {
 
   return (
     <Fragment>
-      <Navbar color="primary" className={classes.Nav} />
-      <ToastContainer />
       {isAuth() ? <Redirect to="/dashboard" /> : null}
       <Grid
         container

@@ -4,29 +4,17 @@ import React, {
   useState,
 } from "react";
 import {
-  AppBar,
   Button,
   Grid,
   makeStyles,
   Paper,
-  Typography,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import AccountImage from "../images/Account_Activation.png";
 import jwt from "jsonwebtoken";
-import { ToastContainer, toast } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
-  center: {
-    textAlign: "center",
-  },
-  title: {
-    fontFamily: "Pacifico",
-    letterSpacing: "2px",
-    padding: "15px 0px",
-  },
   nameStyle: {
     fontWeight: "bold",
     color: "crimson",
@@ -65,7 +53,6 @@ const AccountActivation = ({ match, history }) => {
       data: { token },
     })
       .then((response) => {
-        // console.log("ACCOUNT ACTIVATION", response);
         setValues({ ...values, show: false });
         toast.success(response.data.message);
 
@@ -74,16 +61,13 @@ const AccountActivation = ({ match, history }) => {
         }, 4000);
       })
       .catch((error) => {
-        // console.log(
-        //   "ACCOUNT ACTIVATION ERROR",
-        //   error.response.data.error
-        // );
         toast.error(error.response.data.error);
       });
   };
 
   const accountActivate = () => (
     <Paper elevation={4} className={classes.paperStyle}>
+      <h1 className="logo">PicHub</h1>
       <h3 className="mb">
         Hey{" "}
         <span className={classes.nameStyle}>{name}</span>,
@@ -101,14 +85,6 @@ const AccountActivation = ({ match, history }) => {
 
   return (
     <Fragment>
-      <AppBar className={classes.center}>
-        <Typography variant="h4" className={classes.title}>
-          <Link className="fff" to="/">
-            PicHub
-          </Link>
-        </Typography>
-      </AppBar>
-      <ToastContainer />
       <Grid
         container
         spacing={0}

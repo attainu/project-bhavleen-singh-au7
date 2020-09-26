@@ -4,7 +4,6 @@ import React, {
   useState,
 } from "react";
 import {
-  AppBar,
   Button,
   Grid,
   IconButton,
@@ -14,11 +13,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import SecureImage from "../images/secure.png";
-import { Link } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 import MuiInput from "../components/MuiInput";
 import {
   Visibility,
@@ -26,21 +23,13 @@ import {
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  center: {
-    textAlign: "center",
-  },
-  title: {
-    fontFamily: "Pacifico",
-    letterSpacing: "2px",
-    padding: "15px 0px",
-  },
   nameStyle: {
     fontWeight: "bold",
     color: "crimson",
   },
   paperStyle: {
     margin: "10% auto",
-    width: "50%",
+    width: "60%",
     padding: theme.spacing(5),
     textAlign: "center",
   },
@@ -189,14 +178,6 @@ const ResetPassword = ({ match }) => {
 
   return (
     <Fragment>
-      <AppBar className={classes.center}>
-        <Typography variant="h4" className={classes.title}>
-          <Link className="fff" to="/">
-            PicHub
-          </Link>
-        </Typography>
-      </AppBar>
-      <ToastContainer />
       <Grid
         container
         spacing={0}
