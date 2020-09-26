@@ -245,7 +245,10 @@ const Signup = ({ history }) => {
             className={classes.formBottom}
             variant="outlined"
           >
-            Have an account <Link to="/signin">Log In</Link>
+            Have an account{" "}
+            <Link className="link" to="/signin">
+              Log In
+            </Link>
           </Paper>
         </Grid>
       </Grid>

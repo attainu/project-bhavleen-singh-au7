@@ -168,7 +168,9 @@ const Signin = () => {
         >
           {buttonText}
         </Button>
-        <Link to="/forget-password">Forgot Password?</Link>
+        <Link className="link" to="/forget-password">Forgot Password?</Link>
+
+        
       </form>
     </Paper>
   );
@@ -199,7 +201,7 @@ const Signin = () => {
             variant="outlined"
           >
             Don't have an account?{" "}
-            <Link to="/signup">Sign Up</Link>
+            <Link className="link" to="/signup">Sign Up</Link>
           </Paper>
         </Grid>
       </Grid>

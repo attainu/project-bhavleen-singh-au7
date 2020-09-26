@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+.link{
+  color: green
+}
+
 .navTitle {
   font-family: "Pacifico", sans-serif;
   letter-spacing: 3px;
