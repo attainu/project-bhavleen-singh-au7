@@ -1,21 +1,15 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
-  FormControl,
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   makeStyles,
-  OutlinedInput,
   Paper,
 } from "@material-ui/core";
-import Navbar from "../components/Navbar";
 import MuiInput from "../components/MuiInput";
-// import PasswordField from "../components/PasswordField";
 import { Link, Redirect } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 import Axios from "axios";
 import { isAuth } from "../utils/helper";
 import SignupImage from "../images/signup.png";
@@ -25,13 +19,6 @@ import {
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  Nav: {
-    "& .MuiButton-label": {
-      color: "#fff",
-      padding: "6px 10px",
-      fontWeight: "600",
-    },
-  },
   form: {
     width: "50%",
     margin: "5% auto 0px auto",
@@ -59,7 +46,6 @@ const Signup = ({ history }) => {
     password2: "",
     buttonText: "Sign Up",
     showPassword: false,
-    validateOnchange: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -87,10 +73,6 @@ const Signup = ({ history }) => {
       ...values,
       showPassword: !values.showPassword,
     });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
   };
 
   // Validations
@@ -191,7 +173,6 @@ const Signup = ({ history }) => {
               <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                 >
                   {values.showPassword ? (
                     <Visibility />
@@ -216,7 +197,6 @@ const Signup = ({ history }) => {
               <InputAdornment>
                 <IconButton
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
                 >
                   {values.showPassword ? (
                     <Visibility />
@@ -242,8 +222,6 @@ const Signup = ({ history }) => {
 
   return (
     <Fragment>
-      <Navbar color="primary" className={classes.Nav} />
-      <ToastContainer />
       {isAuth() ? <Redirect to="/dashboard" /> : null}
       <Grid
         container
@@ -267,7 +245,10 @@ const Signup = ({ history }) => {
             className={classes.formBottom}
             variant="outlined"
           >
-            Have an account <Link to="/signin">Log In</Link>
+            Have an account{" "}
+            <Link className="link" to="/signin">
+              Log In
+            </Link>
           </Paper>
         </Grid>
       </Grid>

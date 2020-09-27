@@ -1,15 +1,7 @@
 import React, { Fragment } from "react";
-import { makeStyles, TextField } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
+import { TextField } from "@material-ui/core";
 
 const MuiInput = (props) => {
-  const classes = useStyles();
-
   const {
     name,
     label,

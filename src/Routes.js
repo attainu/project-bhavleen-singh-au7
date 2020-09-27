@@ -7,8 +7,8 @@ import About from "./pages/About";
 import AccountActivation from "./pages/AccountActivation";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
-import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
 
 const Routes = () => {
   return (
@@ -32,11 +32,12 @@ const Routes = () => {
         />
         <Route
           exact
-          path="/auth/password/reset/:token"
-          // path="/auth/password/reset"
+          // path="/auth/password/reset/:token"
+          path="/auth/password/reset"
           component={ResetPassword}
         />
-        <PrivateRoute
+        {/* <PrivateRoute */}
+        <Route
           exact
           path="/dashboard"
           component={Dashboard}

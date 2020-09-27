@@ -7,9 +7,24 @@ body {
   opacity: 0.6;
 }
 
-.fff {
-  color: #fff;
+.navContainer {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.underline {
   text-decoration: none;
+}
+
+.link{
+  color: green
+}
+
+.navTitle {
+  font-family: "Pacifico", sans-serif;
+  letter-spacing: 3px;
+  color: crimson;
+  flex-grow: 1;
 }
 
 .logo {
@@ -25,6 +40,7 @@ body {
   margin-bottom: 40px;
 }
 
+/* Image CSS */
 .thumbImage {
   display: flex;
   margin: auto;
