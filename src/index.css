@@ -1,8 +1,3 @@
-.hundred {
-  height: 100vh;
-  opacity: 0.6;
-}
-
 .navContainer {
   padding-left: 10%;
   padding-right: 10%;
@@ -12,8 +7,8 @@
   text-decoration: none;
 }
 
-.link{
-  color: green
+.link {
+  color: green;
 }
 
 .navTitle {
