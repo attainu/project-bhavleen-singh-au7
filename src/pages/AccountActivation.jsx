@@ -37,13 +37,16 @@ const AccountActivation = ({ match, history }) => {
 
   useEffect(() => {
     let token = match.params.token;
-    let name = jwt.decode(token);
+    // let name = jwt.decode(token);
     if (token) {
-      setValues({ ...values, name, token });
+      // setValues({ ...values, name, token });
+      setValues({ ...values, token });
     }
   }, []);
 
-  const { name, token } = values;
+  const name = "bhavleen";
+  // const { name, token } = values;
+  const { token } = values;
 
   const handleSubmit = (event) => {
     event.preventDefault();
