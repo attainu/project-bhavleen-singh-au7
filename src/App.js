@@ -20,6 +20,11 @@ const App = () => {
     },
   });
 
+  const handleChange = () => {
+    setDarkMode(!darkMode);
+    // localStorage.setItem("isDarkMode", darkMode);
+  };
+
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
@@ -27,7 +32,7 @@ const App = () => {
           <BrowserRouter>
             <Navbar
               checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
+              onChange={handleChange}
             />
             <ToastContainer />
             <Routes />

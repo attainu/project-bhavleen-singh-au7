@@ -36,7 +36,8 @@ const Routes = () => {
           path="/auth/password/reset"
           component={ResetPassword}
         />
-        <PrivateRoute
+        {/* <PrivateRoute */}
+        <Route
           exact
           path="/dashboard"
           component={Dashboard}
