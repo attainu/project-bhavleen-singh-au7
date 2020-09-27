@@ -1,5 +1,5 @@
 body {
-  background-image: url(./images/try_bg.jpg);
+  background-image: url(./images/try_bg.jpg); 
 }
 
 .hundred {
@@ -49,4 +49,4 @@ body {
   100% {
     transform: translateY(-20px);
   }
-}
+} 
