@@ -52,6 +52,7 @@ export const authenticate = (response, next) => {
 };
 
 // Access user info from LocalStorage
+//to protect our app fro CSRF attack
 export const isAuth = () => {
     if (window !== "undefined") {
         const cookieChecked = getCookie("token");
