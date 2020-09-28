@@ -1,52 +1,112 @@
-import express from 'express';
-import upload from '../config/multer';
-import auth from '../middlewares/auth';
-import UserAuthControl from '../controllers/auth';
-import AvatarControl from '../controllers/avatar';         
-import UserControl from '../controllers/user';
-
-const { signup, login, logout, logoutAll } = UserAuthControl;
-const { checkForUsername, userProfile, updateUserProfile, deleteUserProfile } = UserControl
-const { getAvatar, deleteAvatar, multerErrHandler, uploadAvatar } = AvatarControl
+import express from "express";
+import upload from "../config/multer";
+import auth from "../middlewares/auth";
+import UserAuthControl from "../controllers/auth";
+import AvatarControl from "../controllers/avatar";
+import UserControl from "../controllers/user";
+import {
+  userSignupValidator,
+  userSigninValidator,
+  forgetPasswordValidator,
+  resetPasswordValidator,
+} from "../validators/auth";
+import { runValidation } from "../validators";
 
 const router = express.Router();
+
+const {
+  signup,
+  accountActivation,
+  login,
+  forgetPassword,
+  logout,
+  logoutAll,
+} = UserAuthControl;
+
+const {
+  checkForUsername,
+  userProfile,
+  updateUserProfile,
+  deleteUserProfile,
+} = UserControl;
+
+const {
+  getAvatar,
+  deleteAvatar,
+  multerErrHandler,
+  uploadAvatar,
+} = AvatarControl;
 
 /* 
 LOGIN AND SIGNUP ARE PUBLIC ROUTES
 */
 
-// Sign Up  
-router.post('/users', signup);
+// Sign Up
+router.post(
+  "/user",
+  userSignupValidator,
+  runValidation,
+  signup
+);
 
-// Log In 
-router.post('/users/login', login);
+// Account Activation
+router.post("/account-activation", accountActivation);
+
+// Log In
+router.post(
+  "/user/login",
+  userSigninValidator,
+  runValidation,
+  login
+);
 
 // Check if username exists or not
-router.post('/users/username/check', checkForUsername);
+router.post("/user/username/check", checkForUsername);
+
+// Forget Password
+router.put(
+  "/forget-password",
+  forgetPasswordValidator,
+  runValidation,
+  forgetPassword
+);
+
+// Reset Password
+// router.put(
+//   "/reset-password",
+//   resetPasswordValidator,
+//   runValidation,
+//   resetPassword
+// );
 
 // Log Out
-router.post('/users/logout', auth, logout);
+router.get("/user/logout", auth, logout);
 
-// Log out from every device 
-router.post('/users/logoutAll', auth, logoutAll);
+// Log out from every device
+router.get("/user/logoutAll", auth, logoutAll);
 
 // upload Profile Picture
-router.post('/users/me/avatar', auth, upload.single('avatar'), uploadAvatar, multerErrHandler);
+router.post(
+  "/user/me/avatar",
+  auth,
+  upload.single("avatar"),
+  uploadAvatar,
+  multerErrHandler
+);
 
-// Get Profile Picture   
-router.get('/users/me/avatar', auth, getAvatar);
+// Get Profile Picture
+router.get("/user/me/avatar", auth, getAvatar);
 
 // Delete profile picture
-router.delete('/users/me/avatar', auth, deleteAvatar);
+router.delete("/user/me/avatar", auth, deleteAvatar);
 
 //User profile
-router.get('/users/me', auth, userProfile);
+router.get("/user/me", auth, userProfile);
 
 //Update profile
-router.patch('/users/me', auth, updateUserProfile);
+router.patch("/user/me", auth, updateUserProfile);
 
-// Delete user profile    
-router.delete('/users/me', auth, deleteUserProfile);
-
+// Delete user profile
+router.delete("/user/me", auth, deleteUserProfile);
 
 export default router;
