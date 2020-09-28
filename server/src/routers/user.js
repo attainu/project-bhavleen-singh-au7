@@ -19,6 +19,7 @@ const {
   accountActivation,
   login,
   forgetPassword,
+  resetPassword,
   logout,
   logoutAll,
 } = UserAuthControl;
@@ -72,12 +73,12 @@ router.put(
 );
 
 // Reset Password
-// router.put(
-//   "/reset-password",
-//   resetPasswordValidator,
-//   runValidation,
-//   resetPassword
-// );
+router.put(
+  "/reset-password",
+  resetPasswordValidator,
+  runValidation,
+  resetPassword
+);
 
 // Log Out
 router.get("/user/logout", auth, logout);

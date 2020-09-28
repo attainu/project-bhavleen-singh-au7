@@ -31,6 +31,9 @@ class UserAuthControl {
       /* ****************
       Mail Format
       ******************* */
+      const emailSubject =
+        "Account activation link for PicHub.";
+
       const emailFormat = `
         <h1 style="text-align: center;color: RED;">
           PicHub
@@ -44,7 +47,11 @@ class UserAuthControl {
       `;
 
       // Send Mail
-      emailAccountActivation(email, emailFormat);
+      emailAccountActivation(
+        email,
+        emailSubject,
+        emailFormat
+      );
 
       res.status(200).json({
         message: `Email has been sent to ${email}.
@@ -199,6 +206,9 @@ class UserAuthControl {
       /* ****************
       Mail Format
       ******************* */
+      const emailSubject =
+        "Password Reset link for PicHub.";
+
       const emailFormat = `
         <h1 style="text-align: center;color: RED;">
           PicHub
@@ -210,7 +220,11 @@ class UserAuthControl {
       `;
 
       // Send Mail
-      emailAccountActivation(email, emailFormat);
+      emailAccountActivation(
+        email,
+        emailSubject,
+        emailFormat
+      );
 
       return user.updateOne(
         { resetPasswordLink: token },
@@ -234,6 +248,35 @@ class UserAuthControl {
         error: e.message,
         message: "",
       });
+    }
+  }
+
+  static async resetPassword(req, res) {
+    const { resetPasswordLink, newPassword } = req.body;
+
+    if (resetPasswordLink) {
+      jwt.verify(
+        resetPasswordLink,
+        process.env.JWT_RESET_PASSWORD,
+        async (err, decoded) => {
+          if (err) {
+            return res.status(400).json({
+              error: "Expired link. Try Again.",
+            });
+          }
+
+          const user = await User.findById(decoded._id);
+
+          user.password = newPassword;
+
+          await user.save();
+
+          res.json({
+            message:
+              "Great! Now you can login with your New Password.",
+          });
+        }
+      );
     }
   }
 }

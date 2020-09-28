@@ -2,6 +2,7 @@ import nodeMailer from "nodemailer";
 
 const emailAccountActivation = async (
   email,
+  emailSubject,
   emailFormat
 ) => {
   try {
@@ -18,7 +19,7 @@ const emailAccountActivation = async (
     transporter.sendMail({
       from: MY_EMAIL,
       to: email,
-      subject: `Account activation link for PicHub.`,
+      subject: emailSubject,
       html: emailFormat,
     });
   } catch (e) {
