@@ -1,0 +1,59 @@
+.navContainer {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.underline {
+  text-decoration: none;
+}
+
+.link {
+  color: green;
+}
+
+.navTitle {
+  font-family: "Pacifico", sans-serif;
+  letter-spacing: 3px;
+  color: crimson;
+  flex-grow: 1;
+}
+
+.logo {
+  font-family: "Pacifico", sans-serif;
+  letter-spacing: 3px;
+  font-size: xx-large;
+  color: crimson;
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+
+.mb {
+  margin-bottom: 40px;
+}
+
+/* Image CSS */
+.thumbImage {
+  display: flex;
+  margin: auto;
+  filter: drop-shadow(1rem 1rem 1rem grey);
+  animation: up-down 4s ease-in-out infinite
+    alternate-reverse both;
+}
+
+@-webkit-keyframes up-down {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+} 
