@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
+    height: 65,
   },
 }));
 
@@ -20,7 +21,7 @@ const Navbar = (props) => {
   return (
     <div className={classes.root}>
       <AppBar
-        position="sticky"
+        position="fixed"
         color="transparent"
         className="navContainer"
       >

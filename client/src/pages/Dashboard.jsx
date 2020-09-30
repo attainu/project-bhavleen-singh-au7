@@ -17,7 +17,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import AddCommentIcon from "@material-ui/icons/AddComment";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+// import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import image from "../images/gallery.jpg";
 
 const useStyles = makeStyles((theme) => ({

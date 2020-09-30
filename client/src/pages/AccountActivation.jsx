@@ -10,7 +10,6 @@ import {
   Paper,
 } from "@material-ui/core";
 import AccountImage from "../images/Account_Activation.png";
-import jwt from "jsonwebtoken";
 import { toast } from "react-toastify";
 import Axios from "axios";
 
@@ -94,7 +93,7 @@ const AccountActivation = ({ match, history }) => {
         alignItems="center"
         justify="center"
         style={{
-          minHeight: "100vh",
+          minHeight: "90vh",
         }}
       >
         <Grid item xs={12} md={6}>
