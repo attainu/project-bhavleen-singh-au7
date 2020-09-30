@@ -41,6 +41,7 @@ const Signup = ({ history }) => {
 
   const [values, setValues] = useState({
     username: "",
+    name: "",
     email: "",
     password: "",
     password2: "",
@@ -52,6 +53,7 @@ const Signup = ({ history }) => {
 
   const {
     username,
+    name,
     email,
     password,
     password2,
@@ -63,8 +65,6 @@ const Signup = ({ history }) => {
     setValues({ ...values, [name]: event.target.value });
 
     validate({ [name]: event.target.value });
-    console.log(password);
-    console.log(password2);
   };
 
   // Show Password Text
@@ -82,6 +82,17 @@ const Signup = ({ history }) => {
     if ("username" in values)
       temp.username =
         username.length >= 2
+          ? ""
+          : "Minimum characters length should be 3.";
+    // if ("username" in values)
+    //   temp.username =
+    //     username.length <= 3
+    //       ? ""
+    //       : "Make axios requrest for name already exists one";
+
+    if ("name" in values)
+      temp.name =
+        name.length >= 2
           ? ""
           : "Minimum characters length should be 3.";
 
@@ -116,12 +127,13 @@ const Signup = ({ history }) => {
     Axios({
       method: "POST",
       url: `${process.env.REACT_APP_API}/signup`,
-      data: { username, email, password },
+      data: { username, name, email, password },
     })
       .then((response) => {
         setValues({
           ...values,
           username: "",
+          name: "",
           email: "",
           password: "",
           password2: "",
@@ -150,6 +162,15 @@ const Signup = ({ history }) => {
           value={username}
           onChange={handleChange("username")}
           error={errors.username}
+        />
+        <MuiInput
+          label="Name"
+          name="name"
+          type="text"
+          className={classes.mb}
+          value={name}
+          onChange={handleChange("name")}
+          error={errors.name}
         />
         <MuiInput
           label="Email Address"

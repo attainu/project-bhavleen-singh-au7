@@ -11,13 +11,7 @@ const userReducer = (state = initialState, action) => {
         user: action.payload,
         isAuthenticated: true,
       };
-    case "DELETE_USERS_DATA":
-      return {
-        ...state,
-        user: action.payload,
-        isAuthenticated: false,
-      };
-    default:
+      default:
       return state;
   }
 };
