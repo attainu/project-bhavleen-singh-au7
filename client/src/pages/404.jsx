@@ -1,7 +1,8 @@
 import { Button } from "@material-ui/core";
-import React, { Fragment } from "react";
+import React from "react";
 import Image from "../images/404.png";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
+import { Link } from "react-router-dom";
 
 const FallBack = () => {
   return (
@@ -14,7 +15,8 @@ const FallBack = () => {
       <Button
         variant="outlined"
         color="secondary"
-        href="/"
+        component={Link}
+        to="/signup"
         size="large"
         endIcon={<HomeRoundedIcon />}
       >

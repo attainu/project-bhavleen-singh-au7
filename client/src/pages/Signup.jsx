@@ -126,10 +126,12 @@ const Signup = ({ history }) => {
 
     Axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API}/signup`,
+      url: `${process.env.REACT_APP_API}/user`,
       data: { username, name, email, password },
     })
       .then((response) => {
+        console.log(response);
+
         setValues({
           ...values,
           username: "",
@@ -146,6 +148,7 @@ const Signup = ({ history }) => {
       })
       .catch((error) => {
         setValues({ ...values, buttonText: "Sign up" });
+        console.log(error);
         toast.error(error.response.data.error);
       });
   };

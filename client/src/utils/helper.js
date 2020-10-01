@@ -43,13 +43,9 @@ export const removeLocalStorage = (key) => {
 
 // Authenticate user by passing data to cookie, LocalStorage and Redux Store during Signin
 export const authenticate = (response, next) => {
-  //   console.log(
-  //     "UPDATE USER IN LOCAL STORAGE HELPERS",
-  //     response
-  //   );
   setCookie("token", response.data.token);
   setLocalStorage("user", response.data.user);
-
+  userLoginHelper(response.data.user);
   next();
 };
 

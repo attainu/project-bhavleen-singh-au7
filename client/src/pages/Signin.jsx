@@ -12,8 +12,6 @@ import { toast } from "react-toastify";
 import { Link, Redirect } from "react-router-dom";
 import LoginImage from "../images/login.png";
 import { authenticate, isAuth } from "../utils/helper";
-// import { useDispatch, useSelector } from "react-redux";
-// import { userLogin } from "../redux/actions/userAction";
 import {
   Visibility,
   VisibilityOff,
@@ -44,18 +42,12 @@ const Signin = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
-    buttonText: "Log In",
     showPassword: false,
   });
 
   const [errors, setErrors] = useState({});
 
-  const {
-    email,
-    password,
-    showPassword,
-    buttonText,
-  } = values;
+  const { email, password, showPassword } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -95,28 +87,28 @@ const Signin = () => {
   // Button Submit Event
   const handleSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, buttonText: "Logging In" });
+    setValues({ ...values });
 
     Axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API}/signin`,
+      url: `${process.env.REACT_APP_API}/user/login`,
       data: { email, password },
     })
       .then((response) => {
         // Save the response (user, token ) localstorage/cookie
+        console.log(response);
         authenticate(response, () => {
           setValues({
             ...values,
             email: "",
             password: "",
-            buttonText: "Submitted",
           });
         });
       })
       .catch((error) => {
         // console.log("LOGIN ERROR", error.response.data);
 
-        setValues({ ...values, buttonText: "Login" });
+        setValues({ ...values });
         toast.error(error.response.data.error);
       });
   };
@@ -166,11 +158,11 @@ const Signin = () => {
           className={classes.mb}
           onClick={handleSubmit}
         >
-          {buttonText}
+          Log In
         </Button>
-        <Link className="link" to="/forget-password">Forgot Password?</Link>
-
-        
+        <Link className="link" to="/forget-password">
+          Forgot Password?
+        </Link>
       </form>
     </Paper>
   );
@@ -201,7 +193,9 @@ const Signin = () => {
             variant="outlined"
           >
             Don't have an account?{" "}
-            <Link className="link" to="/signup">Sign Up</Link>
+            <Link className="link" to="/signup">
+              Sign Up
+            </Link>
           </Paper>
         </Grid>
       </Grid>

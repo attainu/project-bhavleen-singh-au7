@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Typography, Grid, Box } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typed from "react-typed";
 import Particles from "react-particles-js";

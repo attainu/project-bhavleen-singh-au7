@@ -51,6 +51,7 @@ const Dashboard = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
     <Fragment>
       <Grid container justify="center">

@@ -62,7 +62,7 @@ const ForgetPassword = () => {
 
     axios({
       method: "PUT",
-      url: `${process.env.REACT_APP_API}/forgot-password`,
+      url: `${process.env.REACT_APP_API}/forget-password`,
       data: { email },
     })
       .then((response) => {
