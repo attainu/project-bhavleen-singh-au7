@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar";
 import Routes from "./Routes";
 import { ToastContainer } from "react-toastify";
 import "../node_modules/react-toastify/dist/ReactToastify.min.css";
+import UserProfile from "./pages/UserProfile";
+
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -27,7 +29,9 @@ const App = () => {
 
     return (
         <Fragment>
-            <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <UserProfile />
+            {/* <ThemeProvider theme={theme}>
                 <Paper>
                     <BrowserRouter>
                         <Navbar checked={darkMode} onChange={handleChange} />
@@ -36,7 +40,7 @@ const App = () => {
                         <CssBaseline />
                     </BrowserRouter>
                 </Paper>
-            </ThemeProvider>
+            </ThemeProvider> */}
         </Fragment>
     );
 };

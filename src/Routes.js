@@ -7,8 +7,9 @@ import About from "./pages/About";
 import AccountActivation from "./pages/AccountActivation";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
-import PrivateRoute from "./components/PrivateRoute";
+// import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
+import FallBack from "./pages/404.jsx";
 
 const Routes = () => {
   return (
@@ -32,8 +33,8 @@ const Routes = () => {
         />
         <Route
           exact
-          // path="/auth/password/reset/:token"
-          path="/auth/password/reset"
+          path="/auth/password/reset/:token"
+          // path="/auth/password/reset"
           component={ResetPassword}
         />
         {/* <PrivateRoute */}
@@ -42,6 +43,7 @@ const Routes = () => {
           path="/dashboard"
           component={Dashboard}
         />
+        <Route path="/:something" component={FallBack} />
       </Switch>
     </Fragment>
   );
