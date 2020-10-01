@@ -1,5 +1,5 @@
 import cookie from "js-cookie";
-import { userLoginHelper } from "../redux/actions/userAction";
+// import { userLoginHelper } from "../redux/actions/userAction";
 
 // Set in cookie
 export const setCookie = (key, value) => {
@@ -45,7 +45,7 @@ export const removeLocalStorage = (key) => {
 export const authenticate = (response, next) => {
   setCookie("token", response.data.token);
   setLocalStorage("user", response.data.user);
-  userLoginHelper(response.data.user);
+  // userLoginHelper(response.data.user);
   next();
 };
 

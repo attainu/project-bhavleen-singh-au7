@@ -3,6 +3,8 @@ import { Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Typed from "react-typed";
 import Particles from "react-particles-js";
+import { isAuth } from "../utils/helper";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -36,6 +38,7 @@ const Landing = () => {
 
   return (
     <Fragment>
+      {isAuth() ? <Redirect to="/dashboard" /> : null}
       <Particles
         height="90%"
         canvasClassName={classes.particlesCanva}
