@@ -10,9 +10,7 @@ class UserAuthControl {
       let userExists = await User.findOne({ email });
       if (userExists) {
         return res.status(406).json({
-          statusCode: 406,
           error: "Email already exists.",
-          message: "",
         });
       }
 

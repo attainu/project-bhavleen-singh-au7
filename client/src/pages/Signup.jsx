@@ -142,6 +142,8 @@ const Signup = ({ history }) => {
           buttonText: "Submitted",
         });
 
+        toast.success(response.data.message);
+
         setTimeout(() => {
           history.push("/signin");
         }, 3000);
