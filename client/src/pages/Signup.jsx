@@ -44,7 +44,6 @@ const Signup = ({ history }) => {
     name: "",
     email: "",
     password: "",
-    password2: "",
     buttonText: "Sign Up",
     showPassword: false,
   });
@@ -56,15 +55,14 @@ const Signup = ({ history }) => {
     name,
     email,
     password,
-    password2,
     showPassword,
     buttonText,
   } = values;
 
   const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-
     validate({ [name]: event.target.value });
+
+    setValues({ ...values, [name]: event.target.value });
   };
 
   // Show Password Text
@@ -84,11 +82,6 @@ const Signup = ({ history }) => {
         username.length >= 2
           ? ""
           : "Minimum characters length should be 3.";
-    // if ("username" in values)
-    //   temp.username =
-    //     username.length <= 3
-    //       ? ""
-    //       : "Make axios requrest for name already exists one";
 
     if ("name" in values)
       temp.name =
@@ -106,12 +99,6 @@ const Signup = ({ history }) => {
         password.length > 5
           ? ""
           : "Minimum 6 characters are required.";
-
-    if ("password2" in values)
-      temp.password2 =
-        password === password2
-          ? ""
-          : "Passwords do not match.";
 
     setErrors({ ...temp });
 
@@ -138,7 +125,6 @@ const Signup = ({ history }) => {
           name: "",
           email: "",
           password: "",
-          password2: "",
           buttonText: "Submitted",
         });
 
@@ -210,30 +196,7 @@ const Signup = ({ history }) => {
             ),
           }}
         />
-        <MuiInput
-          label="Confirm Password"
-          name="password2"
-          type={showPassword ? "text" : "password"}
-          className={classes.mb}
-          value={password2}
-          onChange={handleChange("password2")}
-          error={errors.password2}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton
-                  onClick={handleClickShowPassword}
-                >
-                  {values.showPassword ? (
-                    <Visibility />
-                  ) : (
-                    <VisibilityOff />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+
         <Button
           variant="contained"
           color="primary"
@@ -259,13 +222,6 @@ const Signup = ({ history }) => {
         }}
       >
         <Grid item xs={12} md={6}>
-          <img
-            src={SignupImage}
-            alt="signupsvg"
-            className="thumbImage"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
           {signupForm()}
           <Paper
             className={classes.formBottom}
@@ -276,6 +232,21 @@ const Signup = ({ history }) => {
               Log In
             </Link>
           </Paper>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className="bg"
+          style={{
+            minHeight: "90vh",
+          }}
+        >
+          <img
+            src={SignupImage}
+            alt="signupsvg"
+            className="thumbImage"
+          />
         </Grid>
       </Grid>
     </Fragment>

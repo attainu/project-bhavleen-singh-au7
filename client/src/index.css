@@ -11,6 +11,16 @@
   color: green;
 }
 
+.bg {
+  display: flex;
+  background: rgb(236, 125, 181);
+  background: linear-gradient(
+    34deg,
+    rgba(236, 125, 181, 1) 0%,
+    rgba(161, 181, 230, 1) 100%
+  );
+}
+
 .navTitle {
   font-family: "Pacifico", sans-serif;
   letter-spacing: 3px;
@@ -33,7 +43,6 @@
 
 /* Image CSS */
 .thumbImage {
-  display: flex;
   margin: auto;
   filter: drop-shadow(1rem 1rem 1rem grey);
   animation: up-down 4s ease-in-out infinite
@@ -56,4 +65,4 @@
   100% {
     transform: translateY(-20px);
   }
-} 
+}

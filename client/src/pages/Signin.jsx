@@ -50,9 +50,9 @@ const Signin = () => {
   const { email, password, showPassword } = values;
 
   const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-
     validate({ [name]: event.target.value });
+
+    setValues({ ...values, [name]: event.target.value });
   };
 
   // Show Password Text
@@ -96,7 +96,6 @@ const Signin = () => {
     })
       .then((response) => {
         // Save the response (user, token ) localstorage/cookie
-        console.log(response);
         authenticate(response, () => {
           setValues({
             ...values,
@@ -180,13 +179,6 @@ const Signin = () => {
         }}
       >
         <Grid item xs={12} md={6}>
-          <img
-            src={LoginImage}
-            alt="loginsvg"
-            className="thumbImage"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
           {loginForm()}
           <Paper
             className={classes.formBottom}
@@ -197,6 +189,21 @@ const Signin = () => {
               Sign Up
             </Link>
           </Paper>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className="bg"
+          style={{
+            minHeight: "90vh",
+          }}
+        >
+          <img
+            src={LoginImage}
+            alt="loginsvg"
+            className="thumbImage"
+          />
         </Grid>
       </Grid>
     </Fragment>

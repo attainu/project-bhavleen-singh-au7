@@ -119,14 +119,23 @@ const ForgetPassword = () => {
         }}
       >
         <Grid item xs={12} md={6}>
+          {passwordForgetForm()}
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className="bg"
+          style={{
+            minHeight: "90vh",
+          }}
+        >
           <img
             src={ForgetImage}
             alt="forgetsvg"
             className="thumbImage"
           />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          {passwordForgetForm()}
         </Grid>
       </Grid>
     </Fragment>

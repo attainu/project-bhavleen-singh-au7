@@ -188,14 +188,23 @@ const ResetPassword = ({ match }) => {
         }}
       >
         <Grid item xs={12} md={6}>
+          {resetPasswordForm()}
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          md={6}
+          className="bg"
+          style={{
+            minHeight: "90vh",
+          }}
+        >
           <img
             src={SecureImage}
             alt="securesvg"
             className="thumbImage"
           />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          {resetPasswordForm()}
         </Grid>
       </Grid>
     </Fragment>
