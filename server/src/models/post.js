@@ -1,11 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 // import validator from 'validator';
+const { ObjectId } = mongoose.Schema.Types;
 
 const postSchema = new mongoose.Schema(
   {
     image: {
       publicId: {
         type: String,
+        required: true,
       },
       imageUrl: {
         type: String,
@@ -16,10 +18,34 @@ const postSchema = new mongoose.Schema(
       trim: true,
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: ObjectId,
       required: true,
       ref: "User",
     },
+    likes: [
+      {
+        user: {
+          type: ObjectId,
+        },
+      },
+    ],
+    comments: [
+      {
+        user: {
+          type: ObjectId,
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+        },
+      },
+      {
+        timestamps: true,
+      },
+    ],
   },
   {
     timestamps: true,
