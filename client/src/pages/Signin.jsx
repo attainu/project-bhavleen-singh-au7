@@ -1,4 +1,13 @@
 import React, { Fragment, useState } from "react";
+import MuiInput from "../components/MuiInput";
+import { toast } from "react-toastify";
+import { Link, Redirect } from "react-router-dom";
+import { authenticate, isAuth } from "../utils/helper";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import Axios from "axios";
+import { connect } from 'react-redux'
+import LoginImage from "../images/login.png";
+import { setUserLogin } from '../redux/actions/authActions'
 import {
     Button,
     Grid,
@@ -7,15 +16,6 @@ import {
     makeStyles,
     Paper,
 } from "@material-ui/core";
-import MuiInput from "../components/MuiInput";
-import { toast } from "react-toastify";
-import { Link, Redirect } from "react-router-dom";
-import LoginImage from "../images/login.png";
-import { authenticate, isAuth } from "../utils/helper";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
-import Axios from "axios";
-import { connect } from 'react-redux'
-import { setUserLogin } from '../redux/actions/userAction'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Signin = ({ setUser, error, user }) => {
+const Signin = ({ setUser, error, user, removeLoginError }) => {
     const classes = useStyles();
 
     const [values, setValues] = useState({
@@ -89,6 +89,7 @@ const Signin = ({ setUser, error, user }) => {
 
     if(error) {
         toast.error(error)
+        removeLoginError()
     }
 
     const loginForm = () => (
@@ -145,7 +146,7 @@ const Signin = ({ setUser, error, user }) => {
 
     return (
         <Fragment>
-            {user._id && <Redirect to="/dashboard" />}
+            {isAuth() && <Redirect to="/dashboard" />}
             <Grid
                 container
                 spacing={0}
@@ -187,6 +188,7 @@ const Signin = ({ setUser, error, user }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setUser: (user) => dispatch(setUserLogin(user)),
+        removeLoginError: () => dispatch({type: "UNSET_LOGIN_ERROR"})
     };
 };
 
