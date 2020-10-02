@@ -5,37 +5,37 @@ import UserAuthControl from "../controllers/auth";
 import AvatarControl from "../controllers/avatar";
 import UserControl from "../controllers/user";
 import {
-  userSignupValidator,
-  userSigninValidator,
-  forgetPasswordValidator,
-  resetPasswordValidator,
+    userSignupValidator,
+    userSigninValidator,
+    forgetPasswordValidator,
+    resetPasswordValidator,
 } from "../validators/auth";
 import { runValidation } from "../validators";
 
 const router = express.Router();
 
 const {
-  signup,
-  accountActivation,
-  login,
-  forgetPassword,
-  resetPassword,
-  logout,
-  logoutAll,
+    signup,
+    accountActivation,
+    login,
+    forgetPassword,
+    resetPassword,
+    logout,
+    logoutAll,
 } = UserAuthControl;
 
 const {
-  checkForUsername,
-  userProfile,
-  updateUserProfile,
-  deleteUserProfile,
+    checkForUsername,
+    userProfile,
+    updateUserProfile,
+    deleteUserProfile,
 } = UserControl;
 
 const {
-  getAvatar,
-  deleteAvatar,
-  multerErrHandler,
-  uploadAvatar,
+    getAvatar,
+    deleteAvatar,
+    multerErrHandler,
+    uploadAvatar,
 } = AvatarControl;
 
 /* 
@@ -43,41 +43,31 @@ LOGIN AND SIGNUP ARE PUBLIC ROUTES
 */
 
 // Sign Up
-router.post(
-  "/user",
-  userSignupValidator,
-  runValidation,
-  signup
-);
+router.post("/user", userSignupValidator, runValidation, signup);
 
 // Account Activation
 router.post("/account-activation", accountActivation);
 
 // Log In
-router.post(
-  "/user/login",
-  userSigninValidator,
-  runValidation,
-  login
-);
+router.post("/user/login", userSigninValidator, runValidation, login);
 
 // Check if username exists or not
 router.post("/user/username/check", checkForUsername);
 
 // Forget Password
 router.put(
-  "/forget-password",
-  forgetPasswordValidator,
-  runValidation,
-  forgetPassword
+    "/forget-password",
+    forgetPasswordValidator,
+    runValidation,
+    forgetPassword
 );
 
 // Reset Password
 router.put(
-  "/reset-password",
-  resetPasswordValidator,
-  runValidation,
-  resetPassword
+    "/reset-password",
+    resetPasswordValidator,
+    runValidation,
+    resetPassword
 );
 
 // Log Out
@@ -88,11 +78,11 @@ router.get("/user/logoutAll", auth, logoutAll);
 
 // upload Profile Picture
 router.post(
-  "/user/me/avatar",
-  auth,
-  upload.single("avatar"),
-  uploadAvatar,
-  multerErrHandler
+    "/user/me/avatar",
+    auth,
+    upload.single("avatar"),
+    uploadAvatar,
+    multerErrHandler
 );
 
 // Get Profile Picture
