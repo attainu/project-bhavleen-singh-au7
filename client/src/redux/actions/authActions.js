@@ -12,7 +12,6 @@ export const setUserLogin = (userData) => {
             localStorage.setItem('access_token', res.data.token);
             localStorage.setItem('user_info', JSON.stringify(res.data.user));
             dispatch({ type: 'SET_LOGIN_SUCCESS', payload: res.data.user })
-            
         } catch(e) {
             dispatch({ type: 'SET_LOGIN_ERROR', payload: e.response.data.error})
         }
@@ -26,14 +25,18 @@ export const setUserSignout = () => {
                 url: "user/logout",
                 method: "GET",
             };
-            const res = await httpRequest(option);
+            await httpRequest(option);
             localStorage.removeItem('access_token')
             localStorage.removeItem('user_info')
             dispatch({ type: 'SET_LOGOUT_SUCCESS' })
-            console.log('Hhhhhh')
-            window.location.href = '/';
         } catch(e) {
             console.log(e)
         }
     }
+}
+
+
+export const loadUser = () => (dispatch) => {
+    console.log('Here')
+    dispatch({ type: "SET_USER" })
 }

@@ -75,11 +75,11 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-// userSchema.virtual('menstrualDtls', {
-//     ref: 'MenstrualDtl',
-//     localField: '_id',
-//     foreignField: 'owner'
-// });
+userSchema.virtual('posts', {
+    ref: 'Post',
+    localField: '_id',
+    foreignField: 'owner'
+});
 
 // .methods -> methods that available on the instances, called as Instances methods
 userSchema.methods.generateAuthToken = async function () {
@@ -102,7 +102,6 @@ userSchema.methods.toJSON = function () {
     delete userObject.__v;
     delete userObject.password;
     delete userObject.tokens;
-    delete userObject.avatar;
     return userObject;
 };
 

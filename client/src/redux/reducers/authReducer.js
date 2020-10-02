@@ -31,6 +31,12 @@ const userReducer = (state = initialState, action) => {
                 error: "",
                 isAuthenticated: false
             }      
+        case "SET_USER":
+            return {
+                ...state,
+                user: JSON.parse(localStorage.getItem("user_info")),
+                isAuthenticated: true
+            }    
         default:
             return state;
     }

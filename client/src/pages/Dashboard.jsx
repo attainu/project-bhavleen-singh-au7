@@ -1,42 +1,57 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import Card from "../components/MainCards";
-import image from "../images/gallery.jpg";
+import { connect } from "react-redux";
+import { setPublicPosts } from "../redux/actions/postActions";
+import { Redirect } from 'react-router-dom'
 
-const Dashboard = () => {
-  return (
-    <Fragment>
-      <Grid container direction="row">
-        <Grid item sm={4}></Grid>
-        <Grid item sm={4}>
-          <Card
-            avatar="KN"
-            title="NegiAu7"
-            date={Date.now()}
-            image={image}
-            caption="This is the super awesome post by user"
-            comments="Comment Number 1"
-          />
-          <Card
-            avatar="SS"
-            title="SinghAu7"
-            date={Date.now()}
-            image={image}
-            caption="My God what a post"
-            comments="Comment Number 1"
-          />
-          <Card
-            avatar="Author"
-            title="Admin"
-            date={Date.now()}
-            image={image}
-            caption="Ahem! Ahem! Admin Here"
-            comments="Comment Number 1"
-          />
-        </Grid>
-      </Grid>
-    </Fragment>
-  );
+const Dashboard = ({ posts, setPosts, isAuth }) => {
+    useEffect(() => {
+        setPosts();
+    }, []);
+
+    console.log(posts);
+
+    if (!isAuth) {
+        return <Redirect to="/" />;
+    }
+
+    return (
+        <Fragment>
+            <Grid container direction="row">
+                <Grid item sm={4}></Grid>
+                <Grid item sm={4}>
+                    {posts &&
+                        posts.map((post) => (
+                            <Card
+                                key={post._id}
+                                avatar={'XX'}
+                                title={post.owner.username}
+                                date={Date.now()}
+                                image={post.image.imageUrl}
+                                caption={post.caption}
+                                comments={post.comments}
+                            />
+                        ))}
+                </Grid>
+            </Grid>
+        </Fragment>
+    );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+    return {
+        posts: state.postRoot.posts,
+        isAuth: state.userRoot.isAuthenticated
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPosts: () => {
+            dispatch(setPublicPosts());
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

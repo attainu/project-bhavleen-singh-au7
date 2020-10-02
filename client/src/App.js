@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import {
   createMuiTheme,
   CssBaseline,
@@ -10,9 +10,18 @@ import Navbar from "./components/Navbar";
 import Routes from "./Routes";
 import { ToastContainer } from "react-toastify";
 import "../node_modules/react-toastify/dist/ReactToastify.min.css";
+import { connect } from 'react-redux';
+import { loadUser } from './redux/actions/authActions'
 
-const App = () => {
+const App = ({ loadUser }) => {
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+
+      if(localStorage.getItem("access_token") && localStorage.getItem("user_info")) {
+        loadUser()
+      }
+  }, [])
 
   const theme = createMuiTheme({
     palette: {
@@ -44,4 +53,5 @@ const App = () => {
   );
 };
 
-export default App;
+
+export default connect(null, {loadUser})(App);

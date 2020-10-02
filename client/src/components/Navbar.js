@@ -9,11 +9,11 @@ import {
     Toolbar,
     Typography,
 } from "@material-ui/core";
-import { Link, useHistory } from "react-router-dom";
-import { isAuth, signout } from "../utils/helper";
+import { Link } from "react-router-dom";
 import Image from "../images/negi.png";
 import { setUserSignout } from '../redux/actions/authActions'
 import { connect } from 'react-redux'
+
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -23,20 +23,18 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Navbar = (props) => {
-    const history = useHistory();
     const classes = useStyles();
 
     useEffect(() => {});
 
     const handleClick = () => {
         props.setUserSignout()
-        // history.push('/')
     };
 
     return (
         <div className={classes.root}>
             <AppBar
-                position="fixed"
+                position="static"
                 color="inherit"
                 className="navContainer"
                 style={{ background: "transparent", boxShadow: "none" }}
@@ -53,7 +51,23 @@ const Navbar = (props) => {
                         checked={props.checked}
                         onChange={props.onChange}
                     />
-                    {!isAuth() && (
+
+                    {props.isAuth ? (
+                        <Fragment>
+                            <Link to="profile">
+                                <IconButton >
+                                    <Avatar alt="user profile" src={Image} />
+                                </IconButton>
+                            </Link>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={handleClick}
+                            >
+                                Signout
+                            </Button>
+                        </Fragment>
+                    ) : (
                         <Fragment>
                             <Button component={Link} to="/">
                                 Home
@@ -69,31 +83,17 @@ const Navbar = (props) => {
                             </Button>
                         </Fragment>
                     )}
-
-                    {isAuth() && (
-                        <Fragment>
-                            <IconButton>
-                                <Avatar alt="user profile" src={Image} />
-                            </IconButton>
-                            <Button
-                                variant="outlined"
-                                color="secondary"
-                                onClick={handleClick}
-                            >
-                                Signout
-                            </Button>
-                        </Fragment>
-                    )}
                 </Toolbar>
             </AppBar>
         </div>
     );
 };
 
+
 const mapStateToProps = (state) => {
-  return {
-    user: state.userRoot
-  }
+    return {
+        isAuth: state.userRoot.isAuthenticated,
+    }
 }
 
 export default connect(mapStateToProps, {setUserSignout})(Navbar);

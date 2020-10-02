@@ -2,9 +2,7 @@ import React, { Fragment, useState } from "react";
 import MuiInput from "../components/MuiInput";
 import { toast } from "react-toastify";
 import { Link, Redirect } from "react-router-dom";
-import { authenticate, isAuth } from "../utils/helper";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import Axios from "axios";
 import { connect } from 'react-redux'
 import LoginImage from "../images/login.png";
 import { setUserLogin } from '../redux/actions/authActions'
@@ -36,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Signin = ({ setUser, error, user, removeLoginError }) => {
+const Signin = ({ setUser, error, user, removeLoginError, isAuth }) => {
+
+    
+
     const classes = useStyles();
 
     const [values, setValues] = useState({
@@ -144,9 +145,12 @@ const Signin = ({ setUser, error, user, removeLoginError }) => {
         </Paper>
     );
 
+    if (isAuth) {
+        return <Redirect to="/dashboard" />;
+    }
+
     return (
         <Fragment>
-            {isAuth() && <Redirect to="/dashboard" />}
             <Grid
                 container
                 spacing={0}
@@ -194,7 +198,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userRoot.user,
+        isAuth: state.userRoot.isAuthenticated,
         error: state.userRoot.error
     }
 }

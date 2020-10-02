@@ -10,6 +10,7 @@ import ResetPassword from "./pages/ResetPassword";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import FallBack from "./pages/404.jsx";
+import UserProfile from "./pages/UserProfile";
 
 const Routes = () => {
   return (
@@ -41,6 +42,11 @@ const Routes = () => {
           exact
           path="/dashboard"
           component={Dashboard}
+        />
+        <PrivateRoute
+          exact
+          path="/profile"
+          component={UserProfile}
         />
         <Route path="/:fallback" component={FallBack} />
       </Switch>
