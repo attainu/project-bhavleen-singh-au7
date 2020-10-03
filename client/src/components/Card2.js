@@ -20,14 +20,7 @@ const useStyles = makeStyles({
     maxWidth: 345,
     borderRadius: 0,
     margin: "10px",
-  },
-  effect: {
-    borderRadius: "5px",
-    opacity: "1",
-    "&:hover": {
-      opacity: 0.4,
-      cursor: "pointer",
-    },
+    position: "relative",
   },
 });
 
@@ -35,23 +28,23 @@ export default function ImgMediaCard({ post }) {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root} elevation={3}>
-      <Image
-        className={classes.effect}
-        src={post.image.imageUrl}
-        alt="UserImages"
-      />
-    </Paper>
-    // <Card className={classes.root}>
-    //   <CardActionArea>
-    //     <CardMedia
-    //       component="img"
-    //       alt="Contemplative Reptile"
-    //       height="200"
-    //       image={post.image.imageUrl}
-    //       title="Contemplative Reptile"
-    //     />
-    //   </CardActionArea>
-    // </Card>
+    // <Paper className={classes.root} elevation={3}>
+    //   <Image
+    //     className="photoEffects"
+    //     src={post.image.imageUrl}
+    //     alt="UserImages"
+    //   />
+    // </Paper>
+    <Card className={classes.root}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt="Contemplative Reptile"
+          height="200"
+          image={post.image.imageUrl}
+          title="Contemplative Reptile"
+        />
+      </CardActionArea>
+    </Card>
   );
 }
