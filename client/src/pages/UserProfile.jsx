@@ -9,6 +9,7 @@ import UploadModal from "../components/UploadModal";
 import { setProfile } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";
 import { Redirect } from "react-router-dom";
+import LoaderImage from "../images/placeholder.gif";
 const Card2 = lazy(() => import("../components/Card2"));
 
 const useStyles = makeStyles({
@@ -67,10 +68,6 @@ function UserProfile({ isAuth, setProfileData, profile }) {
 
   console.log(profile);
 
-  if (!isAuth) {
-    return <Redirect to="/" />;
-  }
-
   return (
     profile.posts && (
       <Grid container>
@@ -118,7 +115,13 @@ function UserProfile({ isAuth, setProfileData, profile }) {
               profile.posts.map((post) => (
                 <Grid item xs={4} key={post._id}>
                   <Suspense
-                    fallback={<div>Loding .....</div>}
+                    fallback={
+                      <img
+                        src={LoaderImage}
+                        alt="loader_image"
+                        width={345}
+                      />
+                    }
                   >
                     <Card2 post={post} />
                   </Suspense>
