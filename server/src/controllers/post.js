@@ -180,35 +180,35 @@ export default class PostControl {
         }
     }
 
-    // static async deleteComment(req, res) {
-    //     try {
-    //         const post = await Post.findById(req.params.id);
+    static async deleteComment(req, res) {
+        try {
+            const post = await Post.findById(req.params.id);
 
-    //         // console.log(post, req.params.comment_id)
-    //         // Pull out comment
-    //         // const comment = post.comments.find(comment => {
-    //         //     console.log(comment._id.toString(), req.params.comment_id.toString())
-    //         //     comment._id.toString() === req.params.comment_id.toString()
-    //         // });
+            // console.log(post, req.params.comment_id)
+            // Pull out comment
+            // const comment = post.comments.find(comment => {
+            //     console.log(comment._id.toString(), req.params.comment_id.toString())
+            //     comment._id.toString() === req.params.comment_id.toString()
+            // });
             
-    //         console.log(comment)
-    //         // Make sure comment exists
-    //         if (!comment) {
-    //             return res.status(404).json({ msg: "Comment does not exist" });
-    //         }
+            console.log(comment)
+            // Make sure comment exists
+            if (!comment) {
+                return res.status(404).json({ msg: "Comment does not exist" });
+            }
 
-    //         // Check user
-    //         if (comment.userId.toString() !== req.user._id) {
-    //             return res.status(401).json({ msg: "User not authorized" });
-    //         }
-    //         post.comments = post.comments.filter(({ _id }) => _id !== req.params.comment_id);
-    //         await post.save();
-    //         return res.json(post.comments);
-    //     } catch (err) {
-    //         console.error(err.message);
-    //         return res.status(500).send("Server Error");
-    //     }
-    // }
+            // Check user
+            if (comment.userId.toString() !== req.user._id) {
+                return res.status(401).json({ msg: "User not authorized" });
+            }
+            post.comments = post.comments.filter(({ _id }) => _id !== req.params.comment_id);
+            await post.save();
+            return res.json(post.comments);
+        } catch (err) {
+            console.error(err.message);
+            return res.status(500).send("Server Error");
+        }
+    }
 }
 
 
