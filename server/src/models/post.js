@@ -24,23 +24,26 @@ const postSchema = new mongoose.Schema(
         },
         likes: [
             {
-                user: {
+                userId: {
                     type: ObjectId,
                 },
             },
         ],
         comments: [
             {
-                user: {
+                userId: {
                     type: ObjectId,
                 },
-                text: {
+                comment: {
                     type: String,
                     required: true,
                 },
                 name: {
                     type: String,
                 },
+                avatar: {
+                    type: String
+                }
             },
             {
                 timestamps: true,
