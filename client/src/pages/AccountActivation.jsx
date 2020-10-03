@@ -12,6 +12,7 @@ import {
 import AccountImage from "../images/Account_Activation.png";
 import { toast } from "react-toastify";
 import Axios from "axios";
+import jwt from "jsonwebtoken";
 
 const useStyles = makeStyles((theme) => ({
   nameStyle: {
@@ -31,21 +32,20 @@ const AccountActivation = ({ match, history }) => {
   const [values, setValues] = useState({
     name: "",
     token: "",
-    show: true,
   });
 
   useEffect(() => {
     let token = match.params.token;
-    // let name = jwt.decode(token);
+    let { name } = jwt.decode(token);
     if (token) {
-      // setValues({ ...values, name, token });
-      setValues({ ...values, token });
+      setValues({ ...values, name, token });
+      // setValues({ ...values, token });
     }
   }, []);
 
-  const name = "bhavleen";
-  // const { name, token } = values;
-  const { token } = values;
+  // const name = "bhavleen";
+  const { name, token } = values;
+  // const { token } = values;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,7 +55,6 @@ const AccountActivation = ({ match, history }) => {
       data: { token },
     })
       .then((response) => {
-        setValues({ ...values, show: false });
         toast.success(response.data.message);
 
         setTimeout(() => {
