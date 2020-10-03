@@ -43,7 +43,11 @@ const MainCards = (props) => {
       <Card className={classes.root} elevation={4}>
         <CardHeader
           avatar={
-            <Avatar className={classes.avatar}>
+            <Avatar
+              className={classes.avatar}
+              alt="user_profile"
+              src=""
+            >
               {props.avatar}
             </Avatar>
           }
