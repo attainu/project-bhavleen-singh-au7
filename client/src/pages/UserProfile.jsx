@@ -1,13 +1,11 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
 import UploadDialog from "../components/UploadDialog";
-import UploadModal from "../components/UploadModal";
 import { setProfile } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";
-import { Redirect } from "react-router-dom";
 import LoaderImage from "../images/placeholder.gif";
 const Card2 = lazy(() => import("../components/Card2"));
 
@@ -45,21 +43,21 @@ const useStyles = makeStyles({
 });
 
 function UserProfile({ isAuth, setProfileData, profile }) {
-    const classes = useStyles();
-    const {
-        typographyStyles,
-        usernameStyles,
-        nameBioStyles,
-        lowFontWeightStyles,
-        imgCenter,
-        gridImg,
-        input,
-        photoUploadStyle,
-    } = classes;
+  const classes = useStyles();
+  const {
+    // typographyStyles,
+    // usernameStyles,
+    // nameBioStyles,
+    // lowFontWeightStyles,
+    // imgCenter,
+    gridImg,
+    // input,
+    photoUploadStyle,
+  } = classes;
 
     useEffect(() => {
         setProfileData();
-    }, []);
+    }, [setProfileData]);
 
     return (
         profile.posts && (

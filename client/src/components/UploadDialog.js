@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -80,9 +78,9 @@ function FormDialog({ isAuth }) {
           aria-label="add"
         >
           <Fab className={cx(classes.absolute)}>
-            {/* <label htmlFor="icon-button-file"> */}
-            <AddIcon />
-            {/* </label> */}
+            <label htmlFor="icon-button-file">
+                <AddIcon />
+            </label>
           </Fab>
         </Tooltip>
       </div>

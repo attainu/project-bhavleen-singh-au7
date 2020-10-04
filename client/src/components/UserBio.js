@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
-import profilePic from "../images/negi.png";
 
 function UserBio({ user, classes, postCount }) {
   const {
@@ -10,8 +9,6 @@ function UserBio({ user, classes, postCount }) {
     lowFontWeightStyles,
     nameBioStyles,
   } = classes;
-
-  console.log("USERRRR", user);
 
   return (
     user && (
