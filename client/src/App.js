@@ -27,7 +27,7 @@ const App = ({ loadUser }) => {
     ) {
       loadUser();
     }
-  }, []);
+  }, [loadUser]);
 
   const theme = createMuiTheme({
     palette: {

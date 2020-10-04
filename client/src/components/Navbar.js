@@ -14,6 +14,7 @@ import Image from "../images/negi.png";
 import { setUserSignout } from "../redux/actions/authActions";
 import { connect } from "react-redux";
 import HomeIcon from "@material-ui/icons/Home";
+import { Redirect } from 'react-router-dom'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -64,13 +65,15 @@ const Navbar = (props) => {
                   <Avatar alt="user profile" src={Image} />
                 </IconButton>
               </Link>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleClick}
-              >
-                Signout
-              </Button>
+              <Link to="/" className="underline">
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={handleClick}
+                >
+                    Signout
+                </Button>
+              </Link>
             </Fragment>
           ) : (
             <Fragment>
