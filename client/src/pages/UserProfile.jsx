@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 import UploadDialog from "../components/UploadDialog";
 import UploadModal from "../components/UploadModal";
-// import Card2 from "../components/Card2";
 import { setProfile } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";
 import { Redirect } from "react-router-dom";
@@ -19,16 +18,12 @@ const useStyles = makeStyles({
     marginRight: "8%",
   },
   usernameStyles: {
-    fontFamily: "Segoe UI",
     fontSize: "2rem",
-    fontWeight: 100,
     marginBottom: "1.5rem",
     marginTop: "0.9rem",
-    color: "#757575",
   },
   nameBioStyles: {
     marginTop: "1.5rem",
-    fontFamily: "Montserrat",
   },
   lowFontWeightStyles: {
     fontWeight: 200,
@@ -65,8 +60,6 @@ function UserProfile({ isAuth, setProfileData, profile }) {
   useEffect(() => {
     setProfileData();
   }, []);
-
-  console.log(profile);
 
   return (
     profile.posts && (
