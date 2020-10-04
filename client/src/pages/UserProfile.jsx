@@ -1,7 +1,8 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense, useState } from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import UploadDialog from "../components/UploadDialog";
 import { setProfile } from "../redux/actions/profileActions";
@@ -10,6 +11,9 @@ import LoaderImage from "../images/placeholder.gif";
 const Card2 = lazy(() => import("../components/Card2"));
 
 const useStyles = makeStyles({
+    root: {
+        width: "100%"
+    },
     typographyStyles: {
         fontWeight: 500,
         display: "inline",
@@ -43,17 +47,19 @@ const useStyles = makeStyles({
 });
 
 function UserProfile({ isAuth, setProfileData, profile }) {
-  const classes = useStyles();
-  const {
-    // typographyStyles,
-    // usernameStyles,
-    // nameBioStyles,
-    // lowFontWeightStyles,
-    // imgCenter,
-    gridImg,
-    // input,
-    photoUploadStyle,
-  } = classes;
+    const classes = useStyles();
+    const [uploadingPercentage, setuploadingPercentage] = useState(0)
+
+    const {
+        // typographyStyles,
+        // usernameStyles,
+        // nameBioStyles,
+        // lowFontWeightStyles,
+        // imgCenter,
+        gridImg,
+        // input,
+        photoUploadStyle,
+    } = classes;
 
     useEffect(() => {
         setProfileData();
@@ -90,9 +96,17 @@ function UserProfile({ isAuth, setProfileData, profile }) {
                 </Grid> */}
 
                     {/* Photo upload Modal*/}
-                    <Grid item xs={12} className={photoUploadStyle}>
-                        <UploadDialog />
+                    <Grid item xs={12} className={photoUploadStyle} >
+                        <UploadDialog setuploadingPercentage={setuploadingPercentage}/>
                     </Grid>
+
+                    {/* Uploading Loader */}
+                    <div className={classes.root}>
+                        <LinearProgress
+                            variant="determinate"
+                            value={uploadingPercentage}
+                        />
+                    </div>
 
                     {/* User Posts */}
                     <Grid container item xs={12} className={gridImg}>
