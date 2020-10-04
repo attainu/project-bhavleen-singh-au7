@@ -4,7 +4,7 @@ import Card from "../components/MainCards";
 import { connect } from "react-redux";
 import { setPublicPosts } from "../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
-import PlaceholderImage from "../images/profile_placeholder.png";
+import PlaceholderImage from "../images/profile.jpg";
 
 const Dashboard = ({ posts, setPosts, isAuth }) => {
   useEffect(() => {
