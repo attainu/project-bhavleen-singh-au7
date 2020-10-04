@@ -10,6 +10,7 @@ import {
   IconButton,
   Typography,
   makeStyles,
+  Badge,
 } from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddCommentIcon from "@material-ui/icons/AddComment";
@@ -24,6 +25,7 @@ const useStyles = makeStyles(() => ({
   },
   media: {
     paddingTop: "56.25%",
+    objectFit: "fill",
   },
   avatar: {
     backgroundColor: "red",
@@ -46,10 +48,8 @@ const MainCards = (props) => {
             <Avatar
               className={classes.avatar}
               alt="user_profile"
-              src=""
-            >
-              {props.avatar}
-            </Avatar>
+              src={props.avatar}
+            />
           }
           action={
             <IconButton>
@@ -57,31 +57,35 @@ const MainCards = (props) => {
             </IconButton>
           }
           title={<strong>{props.title}</strong>}
-          subheader={props.date}
+          subheader={props.username}
         />
         <CardMedia
           className={classes.media}
           image={props.image}
         />
         <CardContent>
-          <Typography
-            variant="body2"
-            color="textPrimary"
-            component="p"
-          >
+          <Typography variant="body2" component="p">
             {props.caption}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton>
+            {/* <Badge
+              badgeContent={props.likes}
+              color="primary"
+            > */}
             <FavoriteBorderTwoToneIcon />
-            <FavoriteOutlinedIcon color="secondary" />
+            {/* <FavoriteOutlinedIcon color="secondary" /> */}
+            {/* </Badge> */}
           </IconButton>
+
           <IconButton onClick={handleExpandClick}>
+            {/* <Badge
+              badgeContent={props.commentsLength}
+              color="primary"
+            > */}
             <AddCommentIcon />
-          </IconButton>
-          <IconButton>
-            <GetAppIcon />
+            {/* </Badge> */}
           </IconButton>
         </CardActions>
         <Collapse

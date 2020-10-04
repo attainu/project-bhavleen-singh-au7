@@ -4,13 +4,12 @@ import Card from "../components/MainCards";
 import { connect } from "react-redux";
 import { setPublicPosts } from "../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
+import PlaceholderImage from "../images/profile_placeholder.png";
 
 const Dashboard = ({ posts, setPosts, isAuth }) => {
   useEffect(() => {
     setPosts();
   }, []);
-
-  console.log(posts);
 
   if (!isAuth) {
     return <Redirect to="/" />;
@@ -21,15 +20,22 @@ const Dashboard = ({ posts, setPosts, isAuth }) => {
       <Grid container direction="row">
         <Grid item md={3} sm={2} xs={1}></Grid>
         <Grid item md={6} sm={8} xs={10}>
+          {console.log(posts)}
           {posts &&
             posts.map((post) => (
               <Card
                 key={post._id}
-                avatar={"XX"}
-                title={post.owner.username}
-                date={Date.now()}
-                image={post.image.imageUrl}
+                avatar={post.owner.avatar}
+                title={post.owner.name}
+                username={post.owner.username}
+                image={
+                  post.image.imageUrl
+                    ? post.image.imageUrl
+                    : PlaceholderImage
+                }
                 caption={post.caption}
+                likes={post.likes.length}
+                commentsLength={post.comments.length}
                 comments={post.comments}
               />
             ))}

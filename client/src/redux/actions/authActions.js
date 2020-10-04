@@ -45,6 +45,5 @@ export const setUserSignout = () => {
 };
 
 export const loadUser = () => (dispatch) => {
-  console.log("Here");
   dispatch({ type: "SET_USER" });
 };
