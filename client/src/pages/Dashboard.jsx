@@ -25,18 +25,19 @@ const Dashboard = ({ posts, setPosts, isAuth }) => {
             posts.map((post) => (
               <Card
                 key={post._id}
-                avatar={post.owner.avatar}
-                title={post.owner.name}
-                username={post.owner.username}
-                image={
+                avatar={
                   post.image.imageUrl
-                    ? post.image.imageUrl
-                    : PlaceholderImage
+                  // post.owner.avatar.imageUrl
+                  //   ? post.owner.avatar.imageUrl
+                  //   : PlaceholderImage
                 }
+                name={post.owner.name}
+                username={post.owner.username}
+                image={post.image.imageUrl}
                 caption={post.caption}
-                likes={post.likes.length}
-                commentsLength={post.comments.length}
                 comments={post.comments}
+                likes={post.likes.length}
+                commentLength={post.comments.length}
               />
             ))}
         </Grid>

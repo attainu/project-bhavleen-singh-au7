@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Avatar,
   Card,
@@ -11,6 +11,12 @@ import {
   Typography,
   makeStyles,
   Badge,
+  Menu,
+  MenuItem,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
 } from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddCommentIcon from "@material-ui/icons/AddComment";
@@ -25,7 +31,7 @@ const useStyles = makeStyles(() => ({
   },
   media: {
     paddingTop: "56.25%",
-    objectFit: "fill",
+    height: 0,
   },
   avatar: {
     backgroundColor: "red",
@@ -34,10 +40,62 @@ const useStyles = makeStyles(() => ({
 
 const MainCards = (props) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [DialogOpen, setDialogOpen] = useState(false);
+  const handleDelete = () => {
+    const handleClickOpen = () => {
+      setDialogOpen(true);
+    };
+
+    const handleClose = () => {
+      setDialogOpen(false);
+    };
+
+    return (
+      <div>
+        <Button color="primary" onClick={handleClickOpen}>
+          Open
+        </Button>
+        <Dialog open={DialogOpen} onClose={handleClose}>
+          <DialogTitle id="alert">
+            {
+              "Are You Sure, You Want To Delete This Amazing Post?"
+            }
+          </DialogTitle>
+          <DialogActions>
+            <Button
+              variant="outlined"
+              onClick={handleClose}
+              color="secondary"
+            >
+              Just Kidding.
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={handleClose}
+              color="secondary"
+            >
+              Yes, Delete My Post.
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
   };
 
   return (
@@ -45,18 +103,31 @@ const MainCards = (props) => {
       <Card className={classes.root} elevation={4}>
         <CardHeader
           avatar={
-            <Avatar
-              className={classes.avatar}
-              alt="user_profile"
-              src={props.avatar}
-            />
+            <Avatar className={classes.avatar}>
+              {props.avatar}
+            </Avatar>
           }
           action={
-            <IconButton>
-              <MoreHorizIcon />
-            </IconButton>
+            <Fragment>
+              <IconButton onClick={handleClick}>
+                <MoreHorizIcon />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleDelete}>
+                  {"Delete"}
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  {"Close"}
+                </MenuItem>
+              </Menu>
+            </Fragment>
           }
-          title={<strong>{props.title}</strong>}
+          title={<strong>{props.name}</strong>}
           subheader={props.username}
         />
         <CardMedia
@@ -64,28 +135,31 @@ const MainCards = (props) => {
           image={props.image}
         />
         <CardContent>
-          <Typography variant="body2" component="p">
+          <Typography
+            variant="body2"
+            color="textPrimary"
+            component="p"
+          >
             {props.caption}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton>
-            {/* <Badge
+            <Badge
               badgeContent={props.likes}
               color="primary"
-            > */}
-            <FavoriteBorderTwoToneIcon />
+            >
+              <FavoriteBorderTwoToneIcon />
+            </Badge>
             {/* <FavoriteOutlinedIcon color="secondary" /> */}
-            {/* </Badge> */}
           </IconButton>
-
           <IconButton onClick={handleExpandClick}>
-            {/* <Badge
-              badgeContent={props.commentsLength}
+            <Badge
+              badgeContent={props.commentLength}
               color="primary"
-            > */}
-            <AddCommentIcon />
-            {/* </Badge> */}
+            >
+              <AddCommentIcon />
+            </Badge>
           </IconButton>
         </CardActions>
         <Collapse
@@ -96,7 +170,8 @@ const MainCards = (props) => {
           <CardContent>
             <strong>Comments:</strong>
             <Typography paragraph>
-              {props.comments}
+              {/* {props.comments} */}
+              My Comments goes here.
             </Typography>
           </CardContent>
         </Collapse>
