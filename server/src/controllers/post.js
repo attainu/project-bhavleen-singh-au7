@@ -195,20 +195,20 @@ export default class PostControl {
     try {
       const post = await Post.findById(req.params.id);
 
-      // console.log(post, req.params.comment_id)
       // Pull out comment
-      // const comment = post.comments.find(comment => {
-      //     console.log(comment._id.toString(), req.params.comment_id.toString())
-      //     comment._id.toString() === req.params.comment_id.toString()
-      // });
+      var comment = post.comments.find(
+        (comment) => comment.id === req.params.comment_id
+      );
 
-      console.log(comment);
       // Make sure comment exists
       if (!comment) {
         return res
           .status(404)
           .json({ msg: "Comment does not exist" });
       }
+
+      console.log(typeof comment.user);
+      console.log(typeof req.user._id);
 
       // Check user
       if (comment.userId.toString() !== req.user._id) {
