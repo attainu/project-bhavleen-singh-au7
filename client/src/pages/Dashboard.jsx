@@ -1,13 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-import Card from "../components/MainCards";
 import { connect } from "react-redux";
-import {
-  setPublicPosts,
-  addLike,
-} from "../redux/actions/postActions";
+import { setPublicPosts } from "../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
-import PlaceholderImage from "../images/profile.jpg";
+import MainCard from "../components/MainCard";
 
 const Dashboard = ({ posts, setPosts, isAuth }) => {
   useEffect(() => {
@@ -26,22 +22,7 @@ const Dashboard = ({ posts, setPosts, isAuth }) => {
           {console.log(posts)}
           {posts &&
             posts.map((post) => (
-              <Card
-                key={post._id}
-                avatar={
-                  post.image.imageUrl
-                  // post.owner.avatar.imageUrl
-                  //   ? post.owner.avatar.imageUrl
-                  //   : PlaceholderImage
-                }
-                name={post.owner.name}
-                username={post.owner.username}
-                image={post.image.imageUrl}
-                caption={post.caption}
-                comments={post.comments}
-                likes={post.likes.length}
-                commentLength={post.comments.length}
-              />
+              <MainCard key={post._id} post={post} />
             ))}
         </Grid>
       </Grid>
