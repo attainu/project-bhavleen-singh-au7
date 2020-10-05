@@ -21,6 +21,7 @@ import {
 } from "../redux/actions/postActions";
 import { connect } from "react-redux";
 import CommentForm from "./CommentForm";
+import SingleComment from "./SingleComment";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -37,6 +38,7 @@ const MainCards = ({
   addLike,
   removeLike,
   auth,
+  post,
   post: {
     _id,
     image,
@@ -116,10 +118,13 @@ const MainCards = ({
         >
           <CardContent>
             <strong>Comments:</strong>
-            <Typography paragraph>
-              {/* {props.comments} */}
-              My Comments goes here.
-            </Typography>
+            {post.comments.map((comment) => (
+              <SingleComment
+                key={comments._id}
+                comment={comment}
+                postId={_id}
+              />
+            ))}
           </CardContent>
         </Collapse>
       </Card>
