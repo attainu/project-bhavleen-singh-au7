@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function FormDialog({ isAuth, uploadPost, setuploadingPercentage }) {
+function FormDialog({ isAuth, uploadPost, setShowProgress }) {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -73,7 +73,8 @@ function FormDialog({ isAuth, uploadPost, setuploadingPercentage }) {
         const bodyFormData = new FormData();
         bodyFormData.append("caption", caption);
         bodyFormData.append('image', file);     
-        uploadPost(bodyFormData, setuploadingPercentage)
+        uploadPost(bodyFormData, setShowProgress)
+        setShowProgress(true)
     }
 
     return (
@@ -147,7 +148,7 @@ function FormDialog({ isAuth, uploadPost, setuploadingPercentage }) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        uploadPost: (data, setuploadingPercentage) => {dispatch(createPost(data, setuploadingPercentage))}
+        uploadPost: (data, setShowProgress) => {dispatch(createPost(data, setShowProgress))}
     }
 }
 

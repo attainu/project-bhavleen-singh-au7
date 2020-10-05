@@ -14,18 +14,8 @@ export const setProfile = () => async (dispatch) => {
     }
 };
 
-export const createPost = (data, setuploadingPercentage) => async (dispatch) => {
+export const createPost = (data, setShowProgress) => async (dispatch) => {
     try {
-        // const uploadOptions = {
-        //     onUploadProgress: (progressEvent) => {
-        //       const {loaded, total} = progressEvent;
-        //       let percent = Math.floor( (loaded * 100) / total )
-        //       if( percent < 100 ){
-        //         setuploadingPercentage(percent)
-        //       }
-        //     }
-        // }    
-
         const option = {
             baseURL: process.env.REACT_APP_API,
             method: "POST",
@@ -34,19 +24,11 @@ export const createPost = (data, setuploadingPercentage) => async (dispatch) => 
             headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-            onUploadProgress: (progressEvent) => {
-                const {loaded, total} = progressEvent;
-                let percent = Math.floor( (loaded * 100) / total )
-                if( percent < 100 ){
-                  setuploadingPercentage(percent)
-                  setuploadingPercentage(percent-10)
-                }
-                console.log(percent)
             }   
         };
         const res = await axios(option);
         dispatch({ type: "ADD_POST", payload: res.data.data.post })
+        setShowProgress(false)
     } catch (e) {
         console.log(e);
     }

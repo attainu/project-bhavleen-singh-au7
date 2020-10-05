@@ -10,9 +10,12 @@ import UserBio from "../components/UserBio";
 import LoaderImage from "../images/placeholder.gif";
 const Card2 = lazy(() => import("../components/Card2"));
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-        width: "100%"
+        width: "100%",
+        "& > * + *": {
+            marginTop: theme.spacing(2),
+        },
     },
     typographyStyles: {
         fontWeight: 500,
@@ -44,11 +47,11 @@ const useStyles = makeStyles({
         marginTop: "20px",
         textAlign: "center",
     },
-});
+}));
 
 function UserProfile({ isAuth, setProfileData, profile }) {
     const classes = useStyles();
-    const [uploadingPercentage, setuploadingPercentage] = useState(0)
+    const [showProgress, setShowProgress] = useState(false);
 
     const {
         // typographyStyles,
@@ -59,6 +62,7 @@ function UserProfile({ isAuth, setProfileData, profile }) {
         gridImg,
         // input,
         photoUploadStyle,
+        progressBarStyle,
     } = classes;
 
     useEffect(() => {
@@ -96,17 +100,23 @@ function UserProfile({ isAuth, setProfileData, profile }) {
                 </Grid> */}
 
                     {/* Photo upload Modal*/}
-                    <Grid item xs={12} className={photoUploadStyle} >
-                        <UploadDialog setuploadingPercentage={setuploadingPercentage}/>
+                    <Grid item xs={12} className={photoUploadStyle}>
+                        <UploadDialog
+                            setShowProgress={setShowProgress}
+                        />
                     </Grid>
 
                     {/* Uploading Loader */}
-                    <div className={classes.root}>
-                        <LinearProgress
-                            variant="determinate"
-                            value={uploadingPercentage}
-                        />
-                    </div>
+                    {showProgress && (
+                        <div
+                            className={classes.root}
+                            style={{
+                                marginTop: "20px",
+                            }}
+                        >
+                            <LinearProgress color="secondary" />
+                        </div>
+                    )}
 
                     {/* User Posts */}
                     <Grid container item xs={12} className={gridImg}>
