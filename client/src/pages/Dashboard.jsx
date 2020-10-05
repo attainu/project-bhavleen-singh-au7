@@ -2,7 +2,10 @@ import React, { Fragment, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import Card from "../components/MainCards";
 import { connect } from "react-redux";
-import { setPublicPosts } from "../redux/actions/postActions";
+import {
+  setPublicPosts,
+  addLike,
+} from "../redux/actions/postActions";
 import { Redirect } from "react-router-dom";
 import PlaceholderImage from "../images/profile.jpg";
 
