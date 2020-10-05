@@ -18,13 +18,10 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide() {
-  const [open, setOpen] = useState(false);
+export default function AlertDialogSlide({ open, setDialogOpen }) {
 
-  setOpen(true);
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = ({ open }) => {
+    setDialogOpen(false);
   };
 
   return (
