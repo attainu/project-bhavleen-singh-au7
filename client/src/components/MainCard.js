@@ -120,7 +120,7 @@ const MainCards = ({
             <strong>Comments:</strong>
             {post.comments.map((comment) => (
               <SingleComment
-                key={comments._id}
+                key={comment._id}
                 comment={comment}
                 postId={_id}
               />

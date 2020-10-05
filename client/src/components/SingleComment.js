@@ -31,11 +31,7 @@ const SingleComment = ({
 
   return (
     <Fragment>
-      <Paper
-        className={classes.margin}
-        variant="outlined"
-        rounded
-      >
+      <Paper className={classes.margin} variant="outlined">
         <Grid container spacing={2}>
           <Grid item sm={1}>
             <Avatar
