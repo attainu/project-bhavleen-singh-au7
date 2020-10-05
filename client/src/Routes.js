@@ -11,47 +11,41 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 import FallBack from "./pages/404.jsx";
 import UserProfile from "./pages/UserProfile";
+import PublicUserProfile from "./pages/PublicUserProfile";
 
 const Routes = () => {
-  return (
-    <Fragment>
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/signin" component={Signin} />
-        <Route exact path="/about" component={About} />
-        <Route
-          exact
-          path="/auth/activate/:token"
-          // path="/auth/activate"
-          component={AccountActivation}
-        />
-        {/* Route when user click on forget password */}
-        <Route
-          exact
-          path="/forget-password"
-          component={ForgetPassword}
-        />
-        <Route
-          exact
-          path="/auth/password/reset/:token"
-          // path="/auth/password/reset"
-          component={ResetPassword}
-        />
-        <PrivateRoute
-          exact
-          path="/dashboard"
-          component={Dashboard}
-        />
-        <PrivateRoute
-          exact
-          path="/profile"
-          component={UserProfile}
-        />
-        <Route path="/:fallback" component={FallBack} />
-      </Switch>
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/signin" component={Signin} />
+                <Route exact path="/about" component={About} />
+                <Route
+                    exact
+                    path="/auth/activate/:token"
+                    // path="/auth/activate"
+                    component={AccountActivation}
+                />
+                {/* Route when user click on forget password */}
+                <Route
+                    exact
+                    path="/forget-password"
+                    component={ForgetPassword}
+                />
+                <Route
+                    exact
+                    path="/auth/password/reset/:token"
+                    // path="/auth/password/reset"
+                    component={ResetPassword}
+                />
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/profile" component={UserProfile} />
+                <PrivateRoute exact path="/open/profile/:userId" component={PublicUserProfile} />
+                <Route path="/:fallback" component={FallBack} />
+            </Switch>
+        </Fragment>
+    );
 };
 
 export default Routes;

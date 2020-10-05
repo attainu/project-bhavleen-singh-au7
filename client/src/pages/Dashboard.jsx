@@ -48,7 +48,7 @@ const Dashboard = ({ posts, setPosts, isAuth }) => {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.postRoot.posts,
+    posts: state.publicRoot.posts,
     isAuth: state.userRoot.isAuthenticated,
   };
 };

@@ -1,8 +1,9 @@
 const initialState = {
-    posts: null
+    posts: null,
+    profile: null
 };
 
-const postReducer = (state = initialState, action) => {
+const publicReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_POSTS":
             return {
@@ -14,4 +15,4 @@ const postReducer = (state = initialState, action) => {
     }
 };
 
-export default postReducer;
+export default publicReducer;

@@ -81,24 +81,6 @@ function UserProfile({ isAuth, setProfileData, profile }) {
                         postCount={profile.posts.length}
                     />
 
-                    {/* <Grid xs={12} >
-                    <input
-                        accept="image/*"
-                        className={classes.input}
-                        id="icon-button-file"
-                        type="file"
-                    />
-                    <label htmlFor="icon-button-file">
-                        <IconButton
-                            color="primary"
-                            aria-label="upload picture"
-                            component="span"
-                        >
-                            <PhotoCamera />
-                        </IconButton>
-                    </label>
-                </Grid> */}
-
                     {/* Photo upload Modal*/}
                     <Grid item xs={12} className={photoUploadStyle}>
                         <UploadDialog

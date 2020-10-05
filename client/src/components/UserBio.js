@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
+import profileImg from '../images/profile.jpg'
 
 function UserBio({ user, classes, postCount }) {
   const {
@@ -15,7 +16,7 @@ function UserBio({ user, classes, postCount }) {
       <Grid container item xs={12}>
         <Grid item xs={4} className={imgCenter}>
           <img
-            src={user.avatar.imageUrl}
+            src={user.avatar ? user.avatar.imageUrl : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"}
             alt="profile pic"
             width="180px"
             style={{ borderRadius: 100 }}
