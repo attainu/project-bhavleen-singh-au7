@@ -14,15 +14,15 @@ import {
   Menu,
   MenuItem,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
 } from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddCommentIcon from "@material-ui/icons/AddComment";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import FavoriteBorderTwoToneIcon from "@material-ui/icons/FavoriteBorderTwoTone";
 import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
+import ReactImageAppear from "react-image-appear";
+import LoaderImage from "../images/placeholder.gif";
+import DeleteDialog from "../components/DeleteDialog";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -56,46 +56,9 @@ const MainCards = (props) => {
     setAnchorEl(null);
   };
 
-  const [DialogOpen, setDialogOpen] = useState(false);
-  const handleDelete = () => {
-    const handleClickOpen = () => {
-      setDialogOpen(true);
-    };
-
-    const handleClose = () => {
-      setDialogOpen(false);
-    };
-
-    return (
-      <div>
-        <Button color="primary" onClick={handleClickOpen}>
-          Open
-        </Button>
-        <Dialog open={DialogOpen} onClose={handleClose}>
-          <DialogTitle id="alert">
-            {
-              "Are You Sure, You Want To Delete This Amazing Post?"
-            }
-          </DialogTitle>
-          <DialogActions>
-            <Button
-              variant="outlined"
-              onClick={handleClose}
-              color="secondary"
-            >
-              Just Kidding.
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={handleClose}
-              color="secondary"
-            >
-              Yes, Delete My Post.
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
+  const handleClickOpenDialog = () => {
+    console.log("hello");
+    return <DeleteDialog />;
   };
 
   return (
@@ -118,7 +81,7 @@ const MainCards = (props) => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleDelete}>
+                <MenuItem onClick={handleClickOpenDialog}>
                   {"Delete"}
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
