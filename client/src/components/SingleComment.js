@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SingleComment = ({
   postId,
-  comment: { _id, comment, name },
+  comment: { _id, comment, name, userId },
+  user,
   deleteComment,
 }) => {
   const classes = useStyles();
@@ -51,9 +52,14 @@ const SingleComment = ({
             </Typography>
           </Grid>
           <Grid item sm={1}>
-            <IconButton className={classes.small}>
-              <DeleteForeverIcon color="secondary" />
-            </IconButton>
+            {userId === user._id && (
+              <IconButton
+                className={classes.small}
+                onClick={(e) => deleteComment(postId, _id)}
+              >
+                <DeleteForeverIcon color="secondary" />
+              </IconButton>
+            )}
           </Grid>
         </Grid>
       </Paper>
@@ -62,7 +68,7 @@ const SingleComment = ({
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  user: state.userRoot.user,
 });
 
 export default connect(mapStateToProps, { deleteComment })(
