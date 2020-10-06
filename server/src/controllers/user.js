@@ -1,5 +1,5 @@
 import User from "../models/user";
-import Post from '../models/post';
+import Post from "../models/post";
 
 class UserControl {
     static async userProfile(req, res) {
@@ -9,11 +9,11 @@ class UserControl {
             });
             const data = {
                 user: req.user,
-                posts
-            }
-            res.status(200).json(data)
-        } catch(e) {
-            console.log(e)
+                posts,
+            };
+            res.status(200).json(data);
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -79,6 +79,36 @@ class UserControl {
             res.status(500).json({
                 error: "Server Error",
             });
+        }
+    }
+
+    static async openUserProfile(req, res) {
+        let id = req.params.id;
+        try {
+            const user = await User.findById(id);
+            const posts = await Post.find({ owner: id });
+            res.json({ user, posts });
+        } catch (err) {
+            res.status(500).send("Server Error");
+        }
+    }
+
+    static async followUser(req, res) {
+        try {
+            const followId = req.body.followId
+            const userId = req.user._id
+            const user = await User.findById(followId)
+            user.followers = user.followers.concat(userId)
+            await user.save()
+            req.user.following = req.user.following.concat(followId)
+            await req.user.save()
+            res.json({ 
+                following: req.user.following,
+                followers: user.followers
+            })
+        } catch(e) {
+            console.log(e)
+            res.json({ error: e.message })
         }
     }
 }

@@ -6,9 +6,11 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { useParams } from "react-router-dom";
 
 import UploadDialog from "../components/UploadDialog";
-import { setProfile } from "../redux/actions/profileActions";
+import { setPublicProfileData } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";
 import LoaderImage from "../images/placeholder.gif";
+import PublicProfileBio from "../components/PublicProfileBio";
+
 const Card2 = lazy(() => import("../components/Card2"));
 
 const useStyles = makeStyles((theme) => ({
@@ -50,99 +52,69 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UserProfile({ isAuth, setProfileData, profile, history }) {
-
-    const { userId } = useParams()
-    console.log(userId)
+function UserProfile({ setProfile, publicProfile }) {
     const classes = useStyles();
-
     const {
-        // typographyStyles,
-        // usernameStyles,
-        // nameBioStyles,
-        // lowFontWeightStyles,
-        // imgCenter,
         gridImg,
-        // input,
         photoUploadStyle,
         progressBarStyle,
     } = classes;
 
+    const { userId } = useParams();
     useEffect(() => {
-        setProfileData();
-    }, [setProfileData]);
-
+        setProfile(userId);
+    }, [setProfile, userId]);
+    
     return (
-        <div>Public profile</div>
-        // profile.posts && (
-        //     <Grid container>
-        //         <Grid item md={2}></Grid>
-        //         <Grid container item md={8} xs={12} direction="column">
-        //             {/* Users Bio */}
-        //             <UserBio
-        //                 user={profile.user}
-        //                 classes={classes}
-        //                 postCount={profile.posts.length}
-        //             />
+        publicProfile && (
+            <Grid container>
+                <Grid item md={2}></Grid>
+                <Grid container item md={8} xs={12} direction="column">
+                    {/* Users Bio */}
+                    <PublicProfileBio
+                        user={publicProfile.user}
+                        classes={classes}
+                        postCount={publicProfile.posts}
+                        showFollowButton={true}
+                        userId={userId}
+                    />
 
-        //             {/* Photo upload Modal*/}
-        //             <Grid item xs={12} className={photoUploadStyle}>
-        //                 <UploadDialog
-        //                     setShowProgress={setShowProgress}
-        //                 />
-        //             </Grid>
-
-        //             {/* Uploading Loader */}
-        //             {showProgress && (
-        //                 <div
-        //                     className={classes.root}
-        //                     style={{
-        //                         marginTop: "20px",
-        //                     }}
-        //                 >
-        //                     <LinearProgress color="secondary" />
-        //                 </div>
-        //             )}
-
-        //             {/* User Posts */}
-        //             <Grid container item xs={12} className={gridImg}>
-        //                 {profile.posts &&
-        //                     profile.posts.map((post) => (
-        //                         <Grid item xs={4} key={post._id}>
-        //                             <Suspense
-        //                                 fallback={
-        //                                     <img
-        //                                         src={LoaderImage}
-        //                                         alt="loader_image"
-        //                                         width={345}
-        //                                     />
-        //                                 }
-        //                             >
-        //                                 <Card2 post={post} />
-        //                             </Suspense>
-        //                         </Grid>
-        //                     ))}
-        //             </Grid>
-        //         </Grid>
-        //         <Grid item xs={2}></Grid>
-        //     </Grid>
-        // )
+                    {/* User Posts */}
+                    <Grid container item xs={12} className={gridImg}>
+                        {publicProfile.posts &&
+                            publicProfile.posts.map((post) => (
+                                <Grid item xs={4} key={post._id}>
+                                    <Suspense
+                                        fallback={
+                                            <img
+                                                src={LoaderImage}
+                                                alt="loader_image"
+                                                width={345}
+                                            />
+                                        }
+                                    >
+                                        <Card2 post={post} />
+                                    </Suspense>
+                                </Grid>
+                            ))}
+                    </Grid>
+                </Grid>
+                <Grid item xs={2}></Grid>
+            </Grid>
+        )
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        profile: state.profileRoot,
-        isAuth: state.userRoot.isAuthenticated,
-    };
-};
-
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProfileData: () => {
-            dispatch(setProfile());
-        },
-    };
-};
+        setProfile: userId => dispatch(setPublicProfileData(userId))
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        publicProfile: state.publicRoot.publicProfile
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

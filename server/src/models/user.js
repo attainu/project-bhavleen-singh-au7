@@ -3,6 +3,8 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+const { ObjectId } = mongoose.Schema.Types
+
 const userSchema = new mongoose.Schema(
     {
         name: {
@@ -69,6 +71,18 @@ const userSchema = new mongoose.Schema(
                 type: String,
             },
         },
+        followers: [
+            {
+                type: ObjectId,
+                ref: "User"
+            }
+        ],
+        following:[
+            {
+                type: ObjectId,
+                ref: "User"
+            }
+        ]
     },
     {
         timestamps: true,

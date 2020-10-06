@@ -3,7 +3,7 @@ const initialState = {
     publicProfile: null,
 };
 
-const postReducer = (state = initialState, action) => {
+const publicReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_POSTS":
             return {
@@ -22,6 +22,17 @@ const postReducer = (state = initialState, action) => {
         //         : post
         //     ),
         //   };
+
+        case "SET_PUBLIC_PROFILE":
+            return {
+                ...state,
+                publicProfile: action.payload
+            }
+        case "SET_FOLLOW_USER":
+            state.publicProfile.user.followers = [...action.payload ]   
+            return {
+                ...state,
+            }    
         default:
             return state;
     }

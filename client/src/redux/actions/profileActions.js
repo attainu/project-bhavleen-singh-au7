@@ -33,3 +33,16 @@ export const createPost = (data, setShowProgress) => async (dispatch) => {
         console.log(e);
     }
 };
+
+export const setPublicProfileData = (userID) => async dispatch => {
+    try {
+        const option = {
+            url: `user/open/${userID}`,
+            method: "GET",
+        };
+        const res = await httpRequest(option);
+        dispatch({ type: "SET_PUBLIC_PROFILE", payload: res.data });
+    } catch (e) {
+        console.log(e);
+    }
+}

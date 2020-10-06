@@ -90,6 +90,7 @@ function UserProfile({ isAuth, setProfileData, profile }) {
             user={profile.user}
             classes={classes}
             postCount={profile.posts.length}
+            showFollowButton={false}
           />
 
           {/* <Grid xs={12} >

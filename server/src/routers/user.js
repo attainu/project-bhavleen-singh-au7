@@ -29,6 +29,8 @@ const {
     userProfile,
     updateUserProfile,
     deleteUserProfile,
+    openUserProfile,
+    followUser
 } = UserControl;
 
 const {
@@ -99,5 +101,11 @@ router.patch("/user/me", auth, updateUserProfile);
 
 // Delete user profile
 router.delete("/user/me", auth, deleteUserProfile);
+
+//Public user profile
+router.get("/user/open/:id", auth, openUserProfile);
+
+//Follow other user's
+router.put("/follow", auth, followUser)
 
 export default router;

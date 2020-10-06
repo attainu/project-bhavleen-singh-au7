@@ -145,7 +145,7 @@ const MainCards = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    addLike: state.postRoot.post,
+    addLike: state.publicRoot.post,
   };
 };
 
