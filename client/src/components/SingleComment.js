@@ -30,6 +30,8 @@ const SingleComment = ({
 }) => {
   const classes = useStyles();
 
+  console.log(user);
+
   return (
     <Fragment>
       <Paper className={classes.margin} variant="outlined">
@@ -37,7 +39,7 @@ const SingleComment = ({
           <Grid item sm={1}>
             <Avatar
               alt={name}
-              src="/static/images/avatar/1.jpg"
+              src={user.avatar && user.avatar.imageUrl}
               className={classes.small}
             />
           </Grid>

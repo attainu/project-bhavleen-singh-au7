@@ -32,28 +32,6 @@ export const setFollowUser = (userId) => async (
   } catch (e) {}
 };
 
-export const setFollowUser = (userId) => async (
-  dispatch
-) => {
-  try {
-    const option = {
-      data: { followId: userId },
-      url: "follow",
-      method: "PUT",
-    };
-    const res = await httpRequest(option);
-    console.log(res.data);
-    dispatch({
-      type: "SET_FOLLOW_USER",
-      payload: res.data.followers,
-    });
-    dispatch({
-      type: "SET_FOLLOWING",
-      payload: res.data.following,
-    });
-  } catch (e) {}
-};
-
 export const setUnFollowUser = (userId) => async (
   dispatch
 ) => {
@@ -129,6 +107,8 @@ export const addComment = (postId, formData) => async (
 
     const res = await httpRequest(option);
 
+    console.log(res);
+
     dispatch({
       type: "ADD_COMMENT",
       payload: res.data,
@@ -152,7 +132,7 @@ export const deleteComment = (postId, commentId) => async (
 
     const res = await httpRequest(option);
 
-    console.log(res);
+    console.log(option);
 
     dispatch({
       type: "REMOVE_COMMENT",

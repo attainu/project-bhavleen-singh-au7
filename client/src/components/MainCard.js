@@ -33,13 +33,16 @@ const useStyles = makeStyles(() => ({
     paddingTop: "56.25%",
     height: 0,
   },
+  linkColor: {
+    textDecoration: "none",
+    color: "#696969",
+  },
 }));
 
 const MainCards = ({
   addLike,
   removeLike,
   auth,
-  post,
   post: {
     _id,
     image,
@@ -52,7 +55,7 @@ const MainCards = ({
 }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [showLike, setShowLike] = useState(true);
+  const [like, setLike] = useState(true);
 
   return (
     <Fragment>
@@ -71,9 +74,11 @@ const MainCards = ({
           title={
             <Link
               to={`/open/profile/${owner._id}`}
-              className=""
+              className={classes.linkColor}
             >
-              <strong>{owner.name}</strong>
+              <Typography variant="subtitle2">
+                {owner.name}
+              </Typography>
             </Link>
           }
           subheader={owner.username}
@@ -92,8 +97,13 @@ const MainCards = ({
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          {showLike ? (
-            <IconButton onClick={(e) => addLike(_id)}>
+          {like ? (
+            <IconButton
+              onClick={(e) => {
+                addLike(_id);
+                setLike(false);
+              }}
+            >
               <Badge
                 badgeContent={likes.length}
                 color="primary"
@@ -102,7 +112,12 @@ const MainCards = ({
               </Badge>
             </IconButton>
           ) : (
-            <IconButton onClick={(e) => removeLike(_id)}>
+            <IconButton
+              onClick={(e) => {
+                removeLike(_id);
+                setLike(true);
+              }}
+            >
               <Badge
                 badgeContent={likes.length}
                 color="primary"
@@ -130,7 +145,7 @@ const MainCards = ({
         >
           <CardContent>
             <strong>Comments:</strong>
-            {post.comments.map((comment) => (
+            {comments.map((comment) => (
               <SingleComment
                 key={comment._id}
                 comment={comment}
