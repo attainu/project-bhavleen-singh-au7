@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";      
 import {
   Avatar,
   Card,
@@ -51,6 +51,7 @@ const MainCards = ({
 }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [showLike, setShowLike] = useState(true);
 
   return (
     <Fragment>
@@ -83,22 +84,25 @@ const MainCards = ({
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton onClick={(e) => addLike(_id)}>
-            <Badge
-              badgeContent={likes.length}
-              color="primary"
-            >
-              <FavoriteBorderTwoToneIcon />
-            </Badge>
-          </IconButton>
-          <IconButton onClick={(e) => removeLike(_id)}>
-            <Badge
-              badgeContent={likes.length}
-              color="primary"
-            >
-              <FavoriteOutlinedIcon color="secondary" />
-            </Badge>
-          </IconButton>
+          {showLike ? (
+            <IconButton onClick={(e) => addLike(_id)}>
+              <Badge
+                badgeContent={likes.length}
+                color="primary"
+              >
+                <FavoriteBorderTwoToneIcon />
+              </Badge>
+            </IconButton>
+          ) : (
+            <IconButton onClick={(e) => removeLike(_id)}>
+              <Badge
+                badgeContent={likes.length}
+                color="primary"
+              >
+                <FavoriteOutlinedIcon color="secondary" />
+              </Badge>
+            </IconButton>
+          )}
           <IconButton
             onClick={() => setExpanded(!expanded)}
           >
