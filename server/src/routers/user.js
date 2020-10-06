@@ -30,7 +30,8 @@ const {
     updateUserProfile,
     deleteUserProfile,
     openUserProfile,
-    followUser
+    followUser,
+    unFollowUser
 } = UserControl;
 
 const {
@@ -107,5 +108,7 @@ router.get("/user/open/:id", auth, openUserProfile);
 
 //Follow other user's
 router.put("/follow", auth, followUser)
+
+router.put("/unfollow", auth, unFollowUser)
 
 export default router;

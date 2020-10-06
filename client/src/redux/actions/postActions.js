@@ -32,6 +32,52 @@ export const setFollowUser = (userId) => async (
   } catch (e) {}
 };
 
+export const setFollowUser = (userId) => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      data: { followId: userId },
+      url: "follow",
+      method: "PUT",
+    };
+    const res = await httpRequest(option);
+    console.log(res.data);
+    dispatch({
+      type: "SET_FOLLOW_USER",
+      payload: res.data.followers,
+    });
+    dispatch({
+      type: "SET_FOLLOWING",
+      payload: res.data.following,
+    });
+  } catch (e) {}
+};
+
+export const setUnFollowUser = (userId) => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      data: { unFollowId: userId },
+      url: "unfollow",
+      method: "PUT",
+    };
+    const res = await httpRequest(option);
+    console.log(res.data);
+    dispatch({
+      type: "SET_FOLLOW_USER",
+      payload: res.data.followers,
+    });
+    dispatch({
+      type: "SET_FOLLOWING",
+      payload: res.data.following,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // Add Like
 export const addLike = (id) => async (dispatch) => {
   try {

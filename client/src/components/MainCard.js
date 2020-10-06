@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";      
+import React, { Fragment, useState } from "react";
 import {
   Avatar,
   Card,
@@ -22,6 +22,7 @@ import {
 import { connect } from "react-redux";
 import CommentForm from "./CommentForm";
 import SingleComment from "./SingleComment";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -67,7 +68,14 @@ const MainCards = ({
               }
             />
           }
-          title={<strong>{owner.name}</strong>}
+          title={
+            <Link
+              to={`/open/profile/${owner._id}`}
+              className=""
+            >
+              <strong>{owner.name}</strong>
+            </Link>
+          }
           subheader={owner.username}
         />
         <CardMedia
