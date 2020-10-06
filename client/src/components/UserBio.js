@@ -11,11 +11,15 @@ function UserBio({ user, classes, postCount }) {
     } = classes;
 
     return (
-        user ? (
+        user && (
             <Grid container item xs={12}>
                 <Grid item xs={4} className={imgCenter}>
                     <img
-                        src={user.avatar.imageUrl}
+                        src={
+                            user.avatar
+                                ? user.avatar.imageUrl
+                                : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
+                        }
                         alt="profile pic"
                         width="180px"
                         style={{ borderRadius: 100 }}
@@ -46,7 +50,7 @@ function UserBio({ user, classes, postCount }) {
                     </Typography>
                 </Grid>
             </Grid>
-        ): null
+        )
     );
 }
 
