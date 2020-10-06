@@ -1,104 +1,120 @@
 import httpRequest from "../../config/axiosConfig";
+import { toast } from "react-toastify";
 
 export const setPublicPosts = () => async (dispatch) => {
-    try {
-        const option = {
-            url: "posts",
-            method: "GET",
-        };
-        const res = await httpRequest(option);
-        dispatch({ type: "SET_POSTS", payload: res.data });
-    } catch (e) {
-        console.log(e);
-    }
+  try {
+    const option = {
+      url: "posts",
+      method: "GET",
+    };
+    const res = await httpRequest(option);
+    dispatch({ type: "SET_POSTS", payload: res.data });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // Add Like
 export const addLike = (id) => async (dispatch) => {
-    try {
-        const option = {
-            url: `like/${id}`,
-            method: "PUT",
-        };
+  try {
+    const option = {
+      url: `like/${id}`,
+      method: "PUT",
+    };
 
-        const res = await httpRequest(option);
+    const res = await httpRequest(option);
 
-        dispatch({
-            type: "UPDATE_LIKES",
-            payload: { id, likes: res.data },
-        });
-    } catch (e) {
-        console.log(e);
-    }
+    dispatch({
+      type: "UPDATE_LIKES",
+      payload: { id, likes: res.data },
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-export const setFollowUser = (userId) => async (dispatch) => {
-    try {
-        const option = {
-            data: { followId: userId },
-            url: "follow",
-            method: "PUT",
-        };
-        const res = await httpRequest(option);
-        console.log(res.data);
-        dispatch({ type: "SET_FOLLOW_USER", payload: res.data.followers });
-    } catch (e) {}
+export const setFollowUser = (userId) => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      data: { followId: userId },
+      url: "follow",
+      method: "PUT",
+    };
+    const res = await httpRequest(option);
+    console.log(res.data);
+    dispatch({
+      type: "SET_FOLLOW_USER",
+      payload: res.data.followers,
+    });
+  } catch (e) {}
 };
 
 // Remove Like
 export const removeLike = (id) => async (dispatch) => {
-    try {
-        const option = {
-            url: `unlike/${id}`,
-            method: "PUT",
-        };
+  try {
+    const option = {
+      url: `unlike/${id}`,
+      method: "PUT",
+    };
 
-        const res = await httpRequest(option);
+    const res = await httpRequest(option);
 
-        dispatch({
-            type: "UPDATE_LIKES",
-            payload: { id, likes: res.data },
-        });
-    } catch (e) {
-        console.log(e);
-    }
+    dispatch({
+      type: "UPDATE_LIKES",
+      payload: { id, likes: res.data },
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // Add comment
-export const addComment = (postId, formData) => async (dispatch) => {
-    try {
-        const option = {
-            url: `comment/${postId}`,
-            method: "POST",
-            data: formData,
-        };
+export const addComment = (postId, formData) => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      url: `comment/${postId}`,
+      method: "POST",
+      data: formData,
+    };
 
-        const res = await httpRequest(option);
+    const res = await httpRequest(option);
 
-        dispatch({
-            type: "ADD_COMMENT",
-            payload: res.data,
-        });
-    } catch (e) {
-        console.log(e);
-    }
+    dispatch({
+      type: "ADD_COMMENT",
+      payload: res.data,
+    });
+
+    toast.success("Comment Added.");
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // Delete comment
-export const deleteComment = (postId, commentId) => async (dispatch) => {
-    try {
-        const option = {
-            url: `comment/${postId}/${commentId}`,
-            method: "DELETE",
-        };
+export const deleteComment = (postId, commentId) => async (
+  dispatch
+) => {
+  try {
+    const option = {
+      url: `comment/${postId}/${commentId}`,
+      method: "DELETE",
+    };
 
-        const res = await httpRequest(option);
+    const res = await httpRequest(option);
 
-        dispatch({
-            type: "REMOVE_COMMENT",
-            payload: commentId,
-        });
-    } catch (e) {
-        console.log(e);
-    }
+    console.log(res);
+
+    dispatch({
+      type: "REMOVE_COMMENT",
+      payload: commentId,
+    });
+
+    toast.info("Comment Deleted.");
+  } catch (e) {
+    console.log(e);
+  }
 };
