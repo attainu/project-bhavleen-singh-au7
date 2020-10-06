@@ -95,20 +95,45 @@ class UserControl {
 
     static async followUser(req, res) {
         try {
-            const followId = req.body.followId
-            const userId = req.user._id
-            const user = await User.findById(followId)
-            user.followers = user.followers.concat(userId)
-            await user.save()
-            req.user.following = req.user.following.concat(followId)
-            await req.user.save()
-            res.json({ 
+            const followId = req.body.followId;
+            const userId = req.user._id;
+
+            const user = await User.findById(followId);
+            user.followers = user.followers.concat(userId);
+            await user.save();
+
+            req.user.following = req.user.following.concat(followId);
+            await req.user.save();
+
+            res.json({
                 following: req.user.following,
-                followers: user.followers
-            })
-        } catch(e) {
-            console.log(e)
-            res.json({ error: e.message })
+                followers: user.followers,
+            });
+        } catch (e) {
+            console.log(e);
+            res.status(400).json({ error: e.message });
+        }
+    }
+
+    static async unFollowUser(req, res) {
+        try {
+            const unFollowId = req.body.unFollowId;
+            const userId = req.user._id;
+
+            const user = await User.findById(unFollowId);
+            user.followers = user.followers.filter(id => id === userId)
+            await user.save();
+
+            req.user.following = req.user.following.filter(id => id === unFollowId);
+            await req.user.save();
+
+            res.json({
+                following: req.user.following,
+                followers: user.followers,
+            });
+        } catch (e) {
+            console.log(e);
+            res.status(400).json({ error: e.message });
         }
     }
 }

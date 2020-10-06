@@ -34,19 +34,18 @@ function UserBio({ user, classes, postCount }) {
                         <span className={lowFontWeightStyles}>posts</span>
                     </Typography>
                     <Typography className={typographyStyles}>
-                        472{" "}
+                        {user.followers.length ? user.followers.length : 0}{" "}
                         <span className={lowFontWeightStyles}>followers</span>
                     </Typography>
                     <Typography className={typographyStyles}>
-                        1071{" "}
+                        {user.following.length ? user.following.length : 0}{" "}
                         <span className={lowFontWeightStyles}>following</span>
                     </Typography>
                     <Typography className={nameBioStyles}>
                         {user.name}
                     </Typography>
                     <Typography className={lowFontWeightStyles}>
-                        web connoisseur, Everyone can talk. Execution is the
-                        game.
+                        {user.bio ? (user.bio) : ("Update your bio! So that people know you better") }
                     </Typography>
                 </Grid>
             </Grid>

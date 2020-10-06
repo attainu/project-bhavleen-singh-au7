@@ -75,7 +75,6 @@ function UserProfile({ setProfile, publicProfile }) {
                         user={publicProfile.user}
                         classes={classes}
                         postCount={publicProfile.posts}
-                        showFollowButton={true}
                         userId={userId}
                     />
 
