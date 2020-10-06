@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import FallBack from "./pages/404.jsx";
 import UserProfile from "./pages/UserProfile";
 import PublicUserProfile from "./pages/PublicUserProfile";
+import EditProfileForm from "./pages/EditProfileForm";
 
 const Routes = () => {
     return (
@@ -40,6 +41,7 @@ const Routes = () => {
                     component={ResetPassword}
                 />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/profile/edit" component={EditProfileForm} />
                 <PrivateRoute exact path="/profile" component={UserProfile} />
                 <PrivateRoute exact path="/open/profile/:userId" component={PublicUserProfile} />
                 <Route path="/:fallback" component={FallBack} />

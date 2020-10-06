@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Button, Icon } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import { Link } from 'react-router-dom'
 
 function UserBio({ user, classes, postCount }) {
     const {
@@ -28,6 +30,16 @@ function UserBio({ user, classes, postCount }) {
                 <Grid item xs={8}>
                     <Typography variant="h4" className={usernameStyles}>
                         {user.username}
+                        <Link to="/profile/edit">
+                            <Button
+                                variant="outlined"
+                                style={{
+                                    marginLeft: "20px"
+                                }}
+                            >
+                                EDIT PROFILE
+                            </Button>
+                        </Link>
                     </Typography>
                     <Typography className={typographyStyles}>
                         {postCount}{" "}
@@ -45,7 +57,9 @@ function UserBio({ user, classes, postCount }) {
                         {user.name}
                     </Typography>
                     <Typography className={lowFontWeightStyles}>
-                        {user.bio ? (user.bio) : ("Update your bio! So that people know you better") }
+                        {user.bio
+                            ? user.bio
+                            : "Update your bio! So that people know you better"}
                     </Typography>
                 </Grid>
             </Grid>
