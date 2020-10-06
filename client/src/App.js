@@ -43,7 +43,7 @@ const App = ({ loadUser }) => {
   return (
     <Fragment>
       <ThemeProvider theme={theme}>
-        <Paper>
+        <Paper style={{ minHeight: "100vh" }}>
           <BrowserRouter>
             <Navbar
               checked={darkMode}

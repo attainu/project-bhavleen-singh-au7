@@ -1,60 +1,108 @@
 import React from "react";
-import { Grid, Avatar, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Typography,
+  Paper,
+  Grid,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import MuiInput from "../components/MuiInput";
 
-const useStyles = makeStyles({
-    typographyStyles: {
-        fontWeight: 100,
-        fontSize: "20px"
-    },
-    contentStyles: {
-        border: "solid 1px #e0e0e0",
-        padding: "30px",
-    },
-});
+const useStyles = makeStyles((theme) => ({
+  placement: {
+    margin: "20px 40px",
+    padding: theme.spacing(3),
+    paddingLeft: theme.spacing(25),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  pb: {
+    paddingBottom: theme.spacing(4),
+  },
+  ml: {
+    marginLeft: theme.spacing(10),
+  },
+}));
 
 function EditProfileForm() {
-    const classes = useStyles();
-    const { contentStyles, typographyStyles } = classes;
+  const classes = useStyles();
 
-    return (
-        <Grid container>
-            <Grid item md={3}></Grid>
-            <Grid
-                container
-                item
-                md={6}
-                direction="column"
-                className={contentStyles}
-            >
-                <Avatar
-                    alt="AvatarImage"
-                    // src={
-                    //     owner.avatar
-                    //         ? owner.avatar.imageUrl
-                    //         : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
-                    // }
-                    src={"https://i.pinimg.com/originals/ca/76/0b/ca760b70976b52578da88e06973af542.jpg"}
-                    style={{ display: "inline"}}
-                />
-                <Typography 
-                    variant="h4"
-                    className={typographyStyles}
-                    style={{ display: "inline"}}
-                >
-                    oncenegisaid
-                </Typography>
-                <Typography 
-                    variant="h4"
-                    className={typographyStyles}
-                    style={{ display: "inline"}}
-                >
-                    oncenegisaid
-                </Typography>
-            </Grid>
-            <Grid item md={3}></Grid>
+  return (
+    <Paper className={classes.placement} elevation={3}>
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Avatar
+            alt="Remy Sharp"
+            src=""
+            className={classes.large}
+          />
         </Grid>
-    );
+
+        <Grid item xs={6} className={classes.ml}>
+          <Typography variant="h6">UserName</Typography>
+          <Link>Change Profile Photo</Link>
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Typography variant="h6">Username</Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.ml}>
+          <MuiInput
+            label="Username"
+            type="text"
+            width="90%"
+          />
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Typography variant="h6">Name</Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.ml}>
+          <MuiInput label="Name" type="text" />
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Typography variant="h6">Email</Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.ml}>
+          <MuiInput label="Email" type="text" />
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Typography variant="h6">Bio</Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.ml}>
+          <MuiInput label="Bio" type="text" />
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+
+      <Grid container className={classes.pb}>
+        <Grid item xs={1}>
+          <Typography variant="h6">Age</Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.ml}>
+          <MuiInput label="Age" type="text" />
+        </Grid>
+        <Grid item xs={1}></Grid>
+      </Grid>
+    </Paper>
+  );
 }
 
 export default EditProfileForm;
