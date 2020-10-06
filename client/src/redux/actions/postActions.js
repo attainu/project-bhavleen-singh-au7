@@ -100,7 +100,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
         console.log(res);
         dispatch({
             type: "ADD_COMMENT",
-            payload: { data: res.data, postId }
+            payload: { data: res.data, postId },
         });
 
         toast.success("Comment Added.");
@@ -119,11 +119,9 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
 
         const res = await httpRequest(option);
 
-        console.log(option);
-
         dispatch({
             type: "REMOVE_COMMENT",
-            payload: commentId,
+            payload: { data: res.data, postId },
         });
 
         toast.info("Comment Deleted.");

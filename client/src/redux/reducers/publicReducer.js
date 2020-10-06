@@ -48,7 +48,7 @@ const publicReducer = (state = initialState, action) => {
         case "ADD_COMMENT":
             return {
                 ...state,
-                posts: state.posts.map(post =>
+                posts: state.posts.map((post) =>
                     post._id === action.payload.postId
                         ? {
                               ...post,
@@ -61,12 +61,10 @@ const publicReducer = (state = initialState, action) => {
         case "REMOVE_COMMENT":
             return {
                 ...state,
-                posts: {
-                    ...state.posts,
-                    comments: state.posts.comments.filter(
-                        (comment) => comment._id !== payload
-                    ),
-                },
+                posts: state.posts.map(post => post._id === action.payload.postId ? {
+                    ...post,
+                    comments: payload.data,
+                } : post ),
             };
         default:
             return state;

@@ -186,25 +186,23 @@ export default class PostControl {
         try {
             const post = await Post.findById(req.params.id);
 
-            // Pull out comment
-            var comment = post.comments.find(
-                (comment) => comment.id === req.params.comment_id
-            );
+            // // Pull out comment
+            // var comment = post.comments.find(
+            //     (comment) => comment._id === req.params.comment_id
+            // );
 
-            // Make sure comment exists
-            if (!comment) {
-                return res.status(404).json({ msg: "Comment does not exist" });
-            }
+            // // Make sure comment exists
+            // if (!comment) {
+            //     return res.status(404).json({ msg: "Comment does not exist" });
+            // }
 
-            // Check user
-            if (comment.userId.toString() !== req.user._id.toString()) {
-                return res.status(401).json({ msg: "User not authorized" });
-            }
+            // // Check user
+            // if (comment.userId.toString() !== req.user._id.toString()) {
+            //     return res.status(401).json({ msg: "User not authorized" });
+            // }
 
-            post.comments = post.comments.filter(
-                ({ _id }) => _id !== req.params.comment_id
-            );
-
+            post.comments = post.comments.filter(comment => comment._id.toString() !== req.params.comment_id);
+            console.log(post)
             await post.save();
             return res.json(post.comments);
         } catch (err) {
