@@ -1,14 +1,13 @@
 import React, { useEffect, lazy, Suspense, useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 import UploadDialog from "../components/UploadDialog";
 import { setProfile } from "../redux/actions/profileActions";
 import UserBio from "../components/UserBio";
 import LoaderImage from "../images/placeholder.gif";
-import ProfileTab from '../components/ProfileTab'
+import ProfileTab from "../components/ProfileTab";
 const Card2 = lazy(() => import("../components/Card2"));
 
 const useStyles = makeStyles((theme) => ({
@@ -84,13 +83,14 @@ function UserProfile({ isAuth, setProfileData, profile }) {
                             className={classes.root}
                             style={{
                                 marginTop: "20px",
+                                textAlign: "center",
                             }}
                         >
                             <LinearProgress color="secondary" />
                         </div>
                     )}
 
-                    <ProfileTab posts={profile.posts} gridImg={gridImg}/>
+                    <ProfileTab posts={profile.posts} gridImg={gridImg} />
                     {/* User Posts */}
                     {/* <Grid container item xs={12} className={gridImg}>
                         {profile.posts &&
