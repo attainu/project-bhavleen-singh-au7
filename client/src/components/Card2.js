@@ -19,8 +19,8 @@ export default function ImgMediaCard({ post }) {
           />
           <div className="middle">
             <div className="text">
-              <FavoriteOutlinedIcon /> {"Likes"}
-              <AddCommentIcon /> {"Comments"}
+              <FavoriteOutlinedIcon /> {post.likes.length}
+              <AddCommentIcon /> {post.comments.length}
             </div>
           </div>
         </div>

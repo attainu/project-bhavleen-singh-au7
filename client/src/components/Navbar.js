@@ -59,7 +59,14 @@ const Navbar = (props) => {
               </IconButton>
               <Link to="/profile">
                 <IconButton>
-                  <Avatar alt="user profile" src={Image} />
+                  <Avatar
+                    alt="AvatarImage"
+                    src={
+                      props.user.avatar
+                        ? props.user.avatar.imageUrl
+                        : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
+                    }
+                  />
                 </IconButton>
               </Link>
               <Link to="/" className="underline">
@@ -97,6 +104,7 @@ const Navbar = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.userRoot.isAuthenticated,
+    user: state.userRoot.user,
   };
 };
 

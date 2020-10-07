@@ -4,10 +4,9 @@ import React, {
   Suspense,
   useState,
 } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 import UploadDialog from "../components/UploadDialog";
 import { setProfile } from "../redux/actions/profileActions";
@@ -114,6 +113,7 @@ function UserProfile({ isAuth, setProfileData, profile }) {
               className={classes.root}
               style={{
                 marginTop: "20px",
+                textAlign: "center",
               }}
             >
               <LinearProgress color="secondary" />

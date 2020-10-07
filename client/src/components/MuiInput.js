@@ -20,6 +20,8 @@ const MuiInput = (props) => {
         name={name}
         label={label}
         type={type}
+        multiline={false}
+        rows={1}
         value={value}
         onChange={onChange}
         {...other}
