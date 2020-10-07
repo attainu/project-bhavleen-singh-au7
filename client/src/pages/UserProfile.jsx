@@ -58,17 +58,7 @@ function UserProfile({ isAuth, setProfileData, profile }) {
   const classes = useStyles();
   const [showProgress, setShowProgress] = useState(false);
 
-  const {
-    // typographyStyles,
-    // usernameStyles,
-    // nameBioStyles,
-    // lowFontWeightStyles,
-    // imgCenter,
-    gridImg,
-    // input,
-    photoUploadStyle,
-    progressBarStyle,
-  } = classes;
+  const { gridImg, photoUploadStyle } = classes;
 
   useEffect(() => {
     setProfileData();

@@ -51,11 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 function UserProfile({ setProfile, publicProfile }) {
   const classes = useStyles();
-  const {
-    gridImg,
-    photoUploadStyle,
-    progressBarStyle,
-  } = classes;
+  const { gridImg } = classes;
 
   const { userId } = useParams();
   useEffect(() => {

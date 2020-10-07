@@ -34,108 +34,122 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfileForm = ({ user }) => {
   const classes = useStyles();
-  console.log(user);
-  // const []
-  if (user) {
-    //   const { age, email, name, username } = user;
-    //   console.log(age);
-    console.log(user.user);
-  }
 
-  const editForm = () => (
-    <Paper className={classes.placement} elevation={3}>
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Avatar
-            alt="Remy Sharp"
-            src=""
-            className={classes.large}
-          />
+  return (
+    user.user && (
+      <Paper className={classes.placement} elevation={3}>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Avatar
+              alt="Remy Sharp"
+              src=""
+              className={classes.large}
+            />
+          </Grid>
+
+          <Grid item xs={6} className={classes.ml}>
+            <Typography variant="h6">
+              {user.user.username}
+            </Typography>
+            <Link to="/profile/edit">
+              Change Profile Photo
+            </Link>
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
 
-        <Grid item xs={6} className={classes.ml}>
-          <Typography variant="h6">UserName</Typography>
-          <Link>Change Profile Photo</Link>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Typography variant="h6">Username</Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.ml}>
+            <MuiInput
+              label="Username"
+              type="text"
+              value={user.user.username}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
 
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Typography variant="h6">Username</Typography>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Typography variant="h6">Name</Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.ml}>
+            <MuiInput
+              label="Name"
+              type="text"
+              value={user.user.name}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
-        <Grid item xs={6} className={classes.ml}>
-          <MuiInput
-            label="Username"
-            type="text"
-            width="90%"
-          />
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
 
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Typography variant="h6">Name</Typography>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Typography variant="h6">Email</Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.ml}>
+            <MuiInput
+              label="Email"
+              type="text"
+              value={user.user.email}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
-        <Grid item xs={6} className={classes.ml}>
-          <MuiInput label="Name" type="text" />
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
 
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Typography variant="h6">Email</Typography>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Typography variant="h6">Age</Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.ml}>
+            <MuiInput
+              label="Age"
+              type="text"
+              value={user.user.age}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
-        <Grid item xs={6} className={classes.ml}>
-          <MuiInput label="Email" type="text" />
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
 
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Typography variant="h6">Bio</Typography>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}>
+            <Typography variant="h6">Bio</Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.ml}>
+            <MuiInput
+              label="Bio"
+              type="text"
+              value={user.user.bio}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
         </Grid>
-        <Grid item xs={6} className={classes.ml}>
-          <MuiInput label="Bio" type="text" />
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
 
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}>
-          <Typography variant="h6">Age</Typography>
+        <Grid container className={classes.pb}>
+          <Grid item xs={1}></Grid>
+          <Grid
+            item
+            xs={6}
+            className={classes.ml}
+            style={{ textAlign: "right" }}
+          >
+            <Button variant="contained" color="primary">
+              Update Profile
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6} className={classes.ml}>
-          <MuiInput label="Age" type="text" />
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
-
-      <Grid container className={classes.pb}>
-        <Grid item xs={1}></Grid>
-        <Grid
-          item
-          xs={6}
-          className={classes.ml}
-          style={{ textAlign: "right" }}
-        >
-          <Button variant="contained" color="primary">
-            Update Profile
-          </Button>
-        </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+    )
   );
-
-  return <Fragment>{editForm()}</Fragment>;
 };
 
 const mapStateToProps = (state) => {
   return {
     user: state.userRoot,
+    // profile: state.profileRoot,
   };
 };
 
