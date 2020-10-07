@@ -7,69 +7,120 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MuiInput from "../components/MuiInput";
 import { connect } from "react-redux";
+import { updateUserAction } from "../redux/actions/authActions";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
-    placement: {
-        margin: "20px 40px",
-        padding: theme.spacing(3),
-        paddingLeft: "30%",
-        [theme.breakpoints.down("sm")]: {
-            paddingLeft: "10%",
-        },
+  placement: {
+    margin: "20px 40px",
+    padding: theme.spacing(3),
+    paddingLeft: "30%",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: "10%",
     },
-    large: {
-        width: theme.spacing(7),
-        height: theme.spacing(7),
-    },
-    pb: {
-        paddingBottom: theme.spacing(4),
-    },
-    ml: {
-        marginLeft: theme.spacing(10),
-    },
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  pb: {
+    paddingBottom: theme.spacing(4),
+  },
+  ml: {
+    marginLeft: theme.spacing(10),
+  },
 }));
 
 const EditProfileForm = ({ user }) => {
-    const classes = useStyles();
+  const classes = useStyles();
+  const history = useHistory();
 
   const [values, setValues] = useState({
-    username: "",
-    // username: user.user.username,
-    name: "",
-    // name: user.user.name,
-    email: "",
-    // email: user.user.email,
-    age: "",
-    // age: user.user.age,
-    bio: "",
-    // bio: user.user.bio,
+    username: user ? user.username : "",
+    name: user ? user.name : "",
+    email: user ? user.email : "",
+    age: user ? user.age : "",
+    bio: user ? user.bio : "",
   });
-
-  const { username, name, email, age, bio } = values;
 
   const [errors, setErrors] = useState({});
 
+  const { username, name, email, age, bio } = values;
+
   const handleChange = (name) => (e) => {
+    validate({ [name]: e.target.value });
     setValues({ ...values, [name]: e.target.value });
+  };
+
+  // Validations
+  const validate = (values) => {
+    let temp = { ...errors };
+
+    if ("email" in values)
+      temp.email = /[\D\d*]{4}@[\D]{4}.[\D]{3}/.test(email)
+        ? ""
+        : "Email Address is not Valid.";
+
+    if ("username" in values)
+      temp.username =
+        username.length >= 2
+          ? ""
+          : "Minimum characters length should be 3.";
+
+    if ("name" in values)
+      temp.name =
+        name.length >= 2
+          ? ""
+          : "Minimum characters length should be 3.";
+
+    if ("age" in values)
+      temp.age = /[\d]/.test(age)
+        ? ""
+        : "Only Numerals are allowed.";
+
+    if ("bio" in values)
+      temp.bio =
+        bio.length < 49
+          ? ""
+          : "Max characters length should be 50.";
+
+    setErrors({ ...temp });
+
+    // if (values)
+    return Object.values(temp).every((x) => x === "");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log(validate());
+    // if (validate) {
+    //   updateUserAction({ name, username, email, age, bio });
+
+    // if(validate())
+    console.log(validate());
+    toast.success("Profile Updated");
+
+    // setTimeout(() => {
+    //   history.push("/profile");
+    // }, 3000);
+    // } else {
+    //   toast.error("Text Fields contain Errors");
+    // }
   };
 
   return (
-    user.user && (
+    user && (
       <Paper className={classes.placement} elevation={3}>
         <Grid container className={classes.pb}>
           <Grid item xs={1}>
             <Avatar
-              alt={user.user.name}
+              alt={user.name}
               src={
-                user.user.avatar
-                  ? user.user.avatar.imageUrl
+                user.avatar
+                  ? user.avatar.imageUrl
                   : "https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png"
               }
               className={classes.large}
@@ -77,9 +128,7 @@ const EditProfileForm = ({ user }) => {
           </Grid>
 
           <Grid item xs={6} className={classes.ml}>
-            <Typography variant="h6">
-              {user.user.username}
-            </Typography>
+            <Typography variant="h6">{username}</Typography>
             <Link className="link" to="/profile/edit">
               Change Profile Photo
             </Link>
@@ -204,11 +253,12 @@ const EditProfileForm = ({ user }) => {
 };
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.userRoot,
-        // profile: state.profileRoot,
-    };
+  return {
+    user: state.userRoot.user,
+  };
 };
 
-export default connect(mapStateToProps, null)(EditProfileForm);
-// export default EditProfileForm;
+export default connect(
+  mapStateToProps,
+  null
+)(EditProfileForm);

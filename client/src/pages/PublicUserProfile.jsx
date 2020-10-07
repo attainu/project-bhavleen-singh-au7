@@ -91,7 +91,13 @@ function UserProfile({ setProfile, publicProfile }) {
                       />
                     }
                   >
-                    <Card2 post={post} />
+                    <Card2
+                      post={post}
+                      style={{
+                        height: "345px",
+                        width: "345px",
+                      }}
+                    />
                   </Suspense>
                 </Grid>
               ))}

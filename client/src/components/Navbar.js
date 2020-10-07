@@ -60,7 +60,7 @@ const Navbar = (props) => {
               <Link to="/profile">
                 <IconButton>
                   <Avatar
-                    alt="AvatarImage"
+                    alt={props.user.name}
                     src={
                       props.user.avatar
                         ? props.user.avatar.imageUrl

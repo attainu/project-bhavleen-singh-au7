@@ -24,6 +24,7 @@ const MuiInput = (props) => {
         rows={1}
         value={value}
         onChange={onChange}
+        autoComplete="off"
         {...other}
         size="small"
         // If error is not null then we'll do rest of the operations

@@ -1,4 +1,9 @@
-import React, { useEffect, lazy, Suspense, useState } from "react";
+import React, {
+  useEffect,
+  lazy,
+  Suspense,
+  useState,
+} from "react";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -11,88 +16,99 @@ import ProfileTab from "../components/ProfileTab";
 const Card2 = lazy(() => import("../components/Card2"));
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-        "& > * + *": {
-            marginTop: theme.spacing(2),
-        },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
     },
-    typographyStyles: {
-        fontWeight: 500,
-        display: "inline",
-        marginRight: "8%",
-    },
-    usernameStyles: {
-        fontSize: "2rem",
-        marginBottom: "1.5rem",
-        marginTop: "0.9rem",
-    },
-    nameBioStyles: {
-        marginTop: "1.5rem",
-    },
-    lowFontWeightStyles: {
-        fontWeight: 200,
-        fontSize: "0.9rem",
-    },
-    imgCenter: {
-        textAlign: "center",
-    },
-    gridImg: {
-        marginTop: "40px",
-    },
-    input: {
-        display: "none",
-    },
-    photoUploadStyle: {
-        marginTop: "20px",
-        textAlign: "center",
-    },
+  },
+  typographyStyles: {
+    fontWeight: 500,
+    display: "inline",
+    marginRight: "8%",
+  },
+  usernameStyles: {
+    fontSize: "2rem",
+    marginBottom: "1.5rem",
+    marginTop: "0.9rem",
+  },
+  nameBioStyles: {
+    marginTop: "1.5rem",
+  },
+  lowFontWeightStyles: {
+    fontWeight: 200,
+    fontSize: "0.9rem",
+  },
+  imgCenter: {
+    textAlign: "center",
+  },
+  gridImg: {
+    marginTop: "40px",
+  },
+  input: {
+    display: "none",
+  },
+  photoUploadStyle: {
+    marginTop: "20px",
+    textAlign: "center",
+  },
 }));
 
 function UserProfile({ isAuth, setProfileData, profile }) {
-    const classes = useStyles();
-    const [showProgress, setShowProgress] = useState(false);
+  const classes = useStyles();
+  const [showProgress, setShowProgress] = useState(false);
 
-    const { gridImg, photoUploadStyle } = classes;
+  const { gridImg, photoUploadStyle } = classes;
 
-    useEffect(() => {
-        setProfileData();
-    }, [setProfileData]);
+  useEffect(() => {
+    setProfileData();
+  }, [setProfileData]);
 
-    return (
-        profile.posts && (
-            <Grid container>
-                <Grid item md={2}></Grid>
-                <Grid container item md={8} xs={12} direction="column">
-                    {/* Users Bio */}
-                    <UserBio
-                        user={profile.user}
-                        classes={classes}
-                        postCount={profile.posts.length}
-                        showFollowButton={false}
-                    />
+  return (
+    profile.posts && (
+      <Grid container className="mt">
+        <Grid item md={2}></Grid>
+        <Grid
+          container
+          item
+          md={8}
+          xs={12}
+          direction="column"
+        >
+          {/* Users Bio */}
+          <UserBio
+            user={profile.user}
+            classes={classes}
+            postCount={profile.posts.length}
+            showFollowButton={false}
+          />
 
-                    {/* Photo upload Modal*/}
-                    <Grid item xs={12} className={photoUploadStyle}>
-                        <UploadDialog setShowProgress={setShowProgress} />
-                    </Grid>
+          {/* Photo upload Modal*/}
+          <Grid item xs={12} className={photoUploadStyle}>
+            <UploadDialog
+              setShowProgress={setShowProgress}
+            />
+          </Grid>
 
-                    {/* Uploading Loader */}
-                    {showProgress && (
-                        <div
-                            className={classes.root}
-                            style={{
-                                marginTop: "20px",
-                                textAlign: "center",
-                            }}
-                        >
-                            <LinearProgress color="secondary" />
-                        </div>
-                    )}
+          {/* Uploading Loader */}
+          {showProgress && (
+            <div
+              className={classes.root}
+              style={{
+                marginTop: "20px",
+                textAlign: "center",
+              }}
+            >
+              <LinearProgress color="secondary" />
+            </div>
+          )}
 
-                    <ProfileTab posts={profile.posts} gridImg={gridImg} />
-                    {/* User Posts */}
-                    {/* <Grid container item xs={12} className={gridImg}>
+          <ProfileTab
+            posts={profile.posts}
+            gridImg={gridImg}
+          />
+          {/* User Posts */}
+          {/* <Grid container item xs={12} className={gridImg}>
                         {profile.posts &&
                             profile.posts.map((post) => (
                                 <Grid item xs={4} key={post._id}>
@@ -110,26 +126,29 @@ function UserProfile({ isAuth, setProfileData, profile }) {
                                 </Grid>
                             ))}
                     </Grid> */}
-                </Grid>
-                <Grid item xs={2}></Grid>
-            </Grid>
-        )
-    );
+        </Grid>
+        <Grid item xs={2}></Grid>
+      </Grid>
+    )
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        profile: state.profileRoot,
-        isAuth: state.userRoot.isAuthenticated,
-    };
+  return {
+    profile: state.profileRoot,
+    isAuth: state.userRoot.isAuthenticated,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setProfileData: () => {
-            dispatch(setProfile());
-        },
-    };
+  return {
+    setProfileData: () => {
+      dispatch(setProfile());
+    },
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfile);
