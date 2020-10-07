@@ -27,7 +27,10 @@ export const setFollowUser = (userId) => async (dispatch) => {
             type: "SET_FOLLOW_USER",
             payload: res.data.followers,
         });
-    } catch (e) {}
+        dispatch({ type: "SET_FOLLOWING", payload: res.data.following });
+    } catch (e) {
+        console.log(e)
+    }
 };
 
 export const setUnFollowUser = (userId) => async (dispatch) => {

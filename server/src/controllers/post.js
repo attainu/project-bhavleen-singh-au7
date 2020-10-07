@@ -167,6 +167,7 @@ export default class PostControl {
     static async addComment(req, res) {
         try {
             const post = await Post.findById(req.params.id);
+
             const newComment = {
                 comment: req.body.comment,
                 name: req.user.name,

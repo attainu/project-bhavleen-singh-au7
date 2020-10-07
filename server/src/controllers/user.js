@@ -96,13 +96,19 @@ class UserControl {
     static async followUser(req, res) {
         try {
             const followId = req.body.followId;
-            const userId = req.user._id;
+            const userId = req.user.id;
 
             const user = await User.findById(followId);
-            user.followers = user.followers.concat(userId);
+
+            // Check if the user is following the other user already
+            if (user.followers.some(follower => follower.userId.toString() === userId)) {
+                return res.status(400).json({ msg: "Already following this user" });
+            }
+
+            user.followers.unshift({ userId: userId });
             await user.save();
 
-            req.user.following = req.user.following.concat(followId);
+            req.user.following.unshift({ userId: followId });
             await req.user.save();
 
             res.json({
@@ -118,13 +124,13 @@ class UserControl {
     static async unFollowUser(req, res) {
         try {
             const unFollowId = req.body.unFollowId;
-            const userId = req.user._id;
+            const userId = req.user.id;
 
             const user = await User.findById(unFollowId);
-            user.followers = user.followers.filter(id => id === userId)
+            user.followers = user.followers.filter(follower => follower.userId.toString() !== userId)
             await user.save();
 
-            req.user.following = req.user.following.filter(id => id === unFollowId);
+            req.user.following = req.user.following.filter(follower => follower.userId.toString() !== unFollowId);
             await req.user.save();
 
             res.json({
