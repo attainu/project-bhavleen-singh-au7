@@ -107,25 +107,6 @@ function UserProfile({ isAuth, setProfileData, profile }) {
             posts={profile.posts}
             gridImg={gridImg}
           />
-          {/* User Posts */}
-          {/* <Grid container item xs={12} className={gridImg}>
-                        {profile.posts &&
-                            profile.posts.map((post) => (
-                                <Grid item xs={4} key={post._id}>
-                                    <Suspense
-                                        fallback={
-                                            <img
-                                                src={LoaderImage}
-                                                alt="loader_image"
-                                                width={345}
-                                            />
-                                        }
-                                    >
-                                        <Card2 post={post} />
-                                    </Suspense>
-                                </Grid>
-                            ))}
-                    </Grid> */}
         </Grid>
         <Grid item xs={2}></Grid>
       </Grid>

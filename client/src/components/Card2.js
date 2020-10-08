@@ -9,10 +9,7 @@ export default function ImgMediaCard({ post }) {
   return (
     <Suspense>
       <IconButton>
-        <div
-          className="container"
-          style={{ backgroundColor: "black" }}
-        >
+        <div className="container">
           <ReactImageAppear
             src={post.image.imageUrl}
             alt="Avatar"
@@ -22,9 +19,11 @@ export default function ImgMediaCard({ post }) {
           />
           <div className="middle">
             <div className="text">
-              <FavoriteOutlinedIcon /> {post.likes.length}
-              <br />
-              <AddCommentIcon /> {post.comments.length}
+              <FavoriteOutlinedIcon /> {"Likes"}
+              <AddCommentIcon
+                style={{ margin: "10px" }}
+              />{" "}
+              {"Comments"}
             </div>
           </div>
         </div>

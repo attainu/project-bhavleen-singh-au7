@@ -59,38 +59,39 @@ const EditProfileForm = ({ user }) => {
   const validate = (values) => {
     let temp = { ...errors };
 
-    if ("email" in values)
-      temp.email = /[\D\d*]{4}@[\D]{4}.[\D]{3}/.test(email)
-        ? ""
-        : "Email Address is not Valid.";
+    // if ("email" in values)
+    //   temp.email = /[\D\d*]{4}@[\D]{4}.[\D]{3}/.test(email)
+    //     ? ""
+    //     : "Email Address is not Valid.";
 
-    if ("username" in values)
-      temp.username =
-        username.length >= 2
-          ? ""
-          : "Minimum characters length should be 3.";
+    // if ("username" in values)
+    //   temp.username =
+    //     username.length >= 2
+    //       ? ""
+    //       : "Minimum characters length should be 3.";
 
-    if ("name" in values)
-      temp.name =
-        name.length >= 2
-          ? ""
-          : "Minimum characters length should be 3.";
+    // if ("name" in values)
+    //   temp.name =
+    //     name.length >= 2
+    //       ? ""
+    //       : "Minimum characters length should be 3.";
 
-    if ("age" in values)
-      temp.age = /[\d]/.test(age)
-        ? ""
-        : "Only Numerals are allowed.";
+    // if ("age" in values)
+    //   temp.age = /[\d]/.test(age)
+    //     ? ""
+    //     : "Only Numerals are allowed.";
 
-    if ("bio" in values)
-      temp.bio =
-        bio.length < 49
-          ? ""
-          : "Max characters length should be 50.";
+    // if ("bio" in values)
+    //   temp.bio =
+    //     bio.length < 49
+    //       ? ""
+    //       : "Max characters length should be 50.";
 
-    setErrors({ ...temp });
+    // setErrors({ ...temp });
 
+    // // If temp == empty string then form values return true
     // if (values)
-    return Object.values(temp).every((x) => x === "");
+    //   return Object.values(temp).every((x) => x === "");
   };
 
   const handleSubmit = (e) => {

@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(3),
     height: theme.spacing(3),
   },
+  linkColor: {
+    textDecoration: "none",
+    color: "#696969",
+  },
 }));
 
 const SingleComment = ({
@@ -29,8 +34,6 @@ const SingleComment = ({
   deleteComment,
 }) => {
   const classes = useStyles();
-
-  console.log(user);
 
   return (
     <Fragment>
@@ -44,9 +47,14 @@ const SingleComment = ({
             />
           </Grid>
           <Grid item sm={3}>
-            <Typography variant="subtitle2">
-              {name}
-            </Typography>
+            <Link
+              to={`/open/profile/${userId}`}
+              className={classes.linkColor}
+            >
+              <Typography variant="subtitle2">
+                {name}
+              </Typography>
+            </Link>
           </Grid>
           <Grid item sm={6}>
             <Typography variant="body1">

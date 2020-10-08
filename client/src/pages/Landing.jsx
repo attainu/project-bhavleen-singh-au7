@@ -103,9 +103,9 @@ const Landing = () => {
             >
               <Typed
                 strings={[
-                  "Awesome Line 1",
-                  "Great Line with big length 2",
-                  "Awesome and Great Line with moderate length 3",
+                  "Simple, Secure, Reliable Social Media Platform",
+                  "Connect & Share with the People in your life.",
+                  "Be together, whenever",
                 ]}
                 typeSpeed={40}
                 backSpeed={60}

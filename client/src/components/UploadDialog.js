@@ -18,6 +18,11 @@ import cx from "classnames";
 import { createPost } from "../redux/actions/profileActions";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiSvgIcon-root": {
+      marginTop: "5px",
+    },
+  },
   input: {
     display: "none",
   },
