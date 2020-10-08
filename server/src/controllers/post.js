@@ -45,6 +45,18 @@ export default class PostControl {
         }
     }
 
+    static async getSubPosts (req,res) {
+        // if postedBy in following
+        let following = req.user.following.map(follower => follower.userId)
+        console.log(following)
+        try {
+            const posts = await Post.find({ owner: { $in: following }} )
+            res.json({ posts })
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
     static async getPosts(req, res) {
         try {
             const posts = await Post.find()
@@ -69,6 +81,21 @@ export default class PostControl {
             res.send(post);
         } catch (e) {
             res.status(500).json(e.message);
+        }
+    }
+
+    static async savePost(req, res) {
+        try {
+            const id = req.params.id
+            if(req.user.savedPosts.includes(id)) {
+                res.json({ msg: "Post already saved" })
+            }
+            req.user.savedPosts.unshift(id)
+            req.user.save()
+            res.json({ savedPosts: req.user.savedPosts })
+        } catch(e) {
+            console.log(e)
+            res.status(400).json({ err: e })
         }
     }
 

@@ -85,6 +85,7 @@ const userSchema = new mongoose.Schema(
                 },
             },
         ],
+        savedPosts: [{ type: ObjectId }],
     },
     {
         timestamps: true,

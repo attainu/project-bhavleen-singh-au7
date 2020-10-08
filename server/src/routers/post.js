@@ -6,6 +6,8 @@ import auth from "../middlewares/auth";
 
 const {
     getPosts,
+    getSubPosts,
+    savePost,
     createPost,
     getUserPosts,
     getPostById,
@@ -28,9 +30,11 @@ router.post(
     multerErrHandler
 );
 router.get("/posts", getPosts);
+router.get("/posts/sub/me", auth, getSubPosts);
 router.get("/posts/me", auth, getUserPosts);
 router.get("/posts/:id", auth, getPostById);
 router.patch("/posts/:id", auth, updatePost);
+router.patch("/posts/save/:id", auth, savePost);
 router.delete("/posts/:id", auth, deletePost);
 
 router.put('/like/:id', auth, likePost)
