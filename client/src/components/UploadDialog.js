@@ -18,6 +18,11 @@ import cx from "classnames";
 import { createPost } from "../redux/actions/profileActions";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiSvgIcon-root": {
+      marginTop: "5px",
+    },
+  },
   input: {
     display: "none",
   },
@@ -72,7 +77,7 @@ function FormDialog({
   };
 
   const handlePost = (e) => {
-    console.log(file, caption);
+    // console.log(file, caption);
     handleClose();
     const bodyFormData = new FormData();
     bodyFormData.append("caption", caption);
@@ -135,7 +140,7 @@ function FormDialog({
               src={previewFile}
               alt="uploaded"
               width={550}
-              height="50%"
+              // height="40%"
             ></img>
           )}
         </DialogContent>

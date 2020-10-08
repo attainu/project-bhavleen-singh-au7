@@ -78,7 +78,7 @@ function UserProfile({ setProfile, publicProfile }) {
           />
 
           {/* User Posts */}
-          <Grid item xs={12} className={gridImg}>
+          <Grid container item xs={12} className={gridImg}>
             {publicProfile.posts &&
               publicProfile.posts.map((post) => (
                 <Grid item xs={4} key={post._id}>
