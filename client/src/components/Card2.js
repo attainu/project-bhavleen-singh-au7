@@ -6,28 +6,26 @@ import ReactImageAppear from "react-image-appear";
 import LoaderImage from "../images/placeholder.gif";
 
 export default function ImgMediaCard({ post }) {
-  return (
-    <Suspense>
-      <IconButton>
-        <div className="container">
-          <ReactImageAppear
-            src={post.image.imageUrl}
-            alt="Avatar"
-            className="image"
-            style={{ width: "100%" }}
-            loader={LoaderImage}
-          />
-          <div className="middle">
-            <div className="text">
-              <FavoriteOutlinedIcon /> {"Likes"}
-              <AddCommentIcon
-                style={{ margin: "10px" }}
-              />{" "}
-              {"Comments"}
-            </div>
-          </div>
-        </div>
-      </IconButton>
-    </Suspense>
-  );
+    return (
+        <Suspense>
+            <IconButton>
+                <div className="container">
+                    <ReactImageAppear
+                        src={post.image.imageUrl}
+                        alt="Avatar"
+                        className="image"
+                        style={{ width: "100%" }}
+                        loader={LoaderImage}
+                    />
+                    <div className="middle">
+                        <div className="text">
+                            <FavoriteOutlinedIcon /> {post.likes.length}
+                            <AddCommentIcon style={{ margin: "10px" }} />{" "}
+                            {post.comments.length}
+                        </div>
+                    </div>
+                </div>
+            </IconButton>
+        </Suspense>
+    );
 }
