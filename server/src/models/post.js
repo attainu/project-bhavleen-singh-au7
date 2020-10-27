@@ -1,24 +1,59 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 // import validator from 'validator';
+const { ObjectId } = mongoose.Schema.Types;
 
-const postSchema = new mongoose.Schema({
-    image: {
-        public_id: {
-            type: String
+const postSchema = new mongoose.Schema(
+    {
+        image: {
+            publicId: {
+                type: String,
+                required: true,
+            },
+            imageUrl: {
+                type: String,
+            },
         },
-        imageUrl: {
-            type: String
-        }
+        caption: {
+            type: String,
+            trim: true,
+        },
+        owner: {
+            type: ObjectId,
+            required: true,
+            ref: "User",
+        },
+        likes: [
+            {
+                userId: {
+                    type: ObjectId,
+                },
+            },
+        ],
+        comments: [
+            {
+                userId: {
+                    type: ObjectId,
+                },
+                comment: {
+                    type: String,
+                    required: true,
+                },
+                name: {
+                    type: String,
+                },
+                avatar: {
+                    type: String
+                }
+            },
+            {
+                timestamps: true,
+            },
+        ],
     },
-    caption: {
-        type: String,
-        trim: true
-    },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-        ref: 'User'
+    {
+        timestamps: true,
     }
+);
 
-})
+const Post = mongoose.model("Post", postSchema);
+export default Post;
